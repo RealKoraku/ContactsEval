@@ -9,27 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactsAttempt {
-    internal class Contact {
-
-        public string dataId;
-        public string firstName;
-        public string middleName;
-        public string lastName;
-        public string nickname;
-        public string title;
-        public string birthDate;
-        public string email;
-        public string phone;
-        public string street;
-        public string city;
-        public string state;
-        public string zipCode;
-        public string country;
-        public string website;
-        public string notes;
-        public string picture;
-        public bool isFavorite;
-        public bool isActive;
+    public class Contact {
 
         public string DataId { get; set; }
         public string FirstName { get; set; }
@@ -51,14 +31,8 @@ namespace ContactsAttempt {
         public bool IsFavorite { get; set; }
         public bool IsActive { get; set; }
 
-        public Contact(string dataId) {
-
+        public override string ToString() {
+            return $"{FirstName} {LastName}";
         }
-
-      //private Contact SetContact() {
-      //    string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
-
-
-      //}
     }
 }

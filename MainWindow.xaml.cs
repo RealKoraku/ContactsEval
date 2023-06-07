@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dapper;
 
 namespace ContactsAttempt {
     /// <summary>
@@ -20,14 +21,16 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class MainWindow : Window {
 
-        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true"; 
 
         public MainWindow() {
      
             InitializeComponent();
 
             bool connected = TestConnection();
-            PopulateListBox();
+            List<Contact> contacts = GetData();
+            UpdateContactScreen(contacts[0]);
+            ContactsListBox.ItemsSource = contacts;
         }
 
         static bool TestConnection() {
@@ -42,33 +45,15 @@ namespace ContactsAttempt {
             }
         }
 
-        static void AddContact(string tableName) {
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-
-            string commandString = $"SELECT * FROM dbo.{tableName}";
-
-            SqlCommand command = new SqlCommand(commandString);
-
-            try {
-                SqlDataReader result = command.ExecuteReader();
-
-                while (result.Read()) {
-                    for (int fieldIndex = 0; fieldIndex < result.FieldCount; fieldIndex++) {
-                        Console.WriteLine(($"{result[fieldIndex]} "));
-                    }
-                }
-
-            } catch (Exception exception) {
-                Console.WriteLine(exception);
+        private List<Contact> GetData() {
+            var connection = new SqlConnection(connectionString);
+            using(connection) {
+                return connection.Query<Contact>("SELECT * FROM tblContact").ToList();
             }
-            connection.Close();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
             NameId.Content = "Hello";
-
-            AddContact("tblContact");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -84,33 +69,6 @@ namespace ContactsAttempt {
             PhoneId.Content = currentContact.Phone;
             WebId.Content = currentContact.Website;
             NotesId.Content = currentContact.Notes;
-
-        }
-
-        private void PopulateListBox() { 
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-
-            ListBox contactsList = new ListBox();
-
-            string commandString = "SELECT firstName FROM dbo.tblContact";
-
-            SqlCommand command = new SqlCommand(commandString, connection);
-
-            try {
-                SqlDataReader result = command.ExecuteReader();
-
-                while (result.Read()) {
-                    for (int fieldIndex = 0; fieldIndex < result.FieldCount; fieldIndex++) {
-                        contactsList.Items.Add(($"{result[fieldIndex]} "));
-                    }
-                }
-
-            } catch (Exception exception) {
-                Console.WriteLine(exception);
-            }
-            connection.Close();
-
         }
     }
 }
