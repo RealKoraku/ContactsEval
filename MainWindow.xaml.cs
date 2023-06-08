@@ -21,15 +21,15 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class MainWindow : Window {
 
-        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true"; 
+        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
 
         public MainWindow() {
      
             InitializeComponent();
-
+            //CC.Content = new HomeScreen();
             bool connected = TestConnection();
             List<Contact> contacts = GetData();
-            UpdateContactScreen(contacts[0]);
+            UpdateContactScreen(contacts[1]);
             ContactsListBox.ItemsSource = contacts;
         }
 
@@ -52,11 +52,24 @@ namespace ContactsAttempt {
             }
         }
 
+        private List<Contact> AddContact(List<Contact> contacts) {
+            Contact addedContact = new Contact();
+            var connection = new SqlConnection(connectionString);
+
+            using(connection) {
+                connection.Query<Contact>("INSERT INTO");
+            }
+            contacts.Add(addedContact);
+            return contacts;
+        }
+
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
             NameId.Content = "Hello";
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
+
         }
 
         private void UpdateContactScreen(Contact currentContact) {

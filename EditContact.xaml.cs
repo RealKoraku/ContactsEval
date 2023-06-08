@@ -15,10 +15,10 @@ using System.Windows.Shapes;
 
 namespace ContactsAttempt {
     /// <summary>
-    /// Interaction logic for AddContact.xaml
+    /// Interaction logic for EditContact.xaml
     /// </summary>
-    public partial class AddContact : UserControl {
-        public AddContact() {
+    public partial class EditContact : UserControl {
+        public EditContact() {
             InitializeComponent();
         }
     }

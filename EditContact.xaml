@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ContactsAttempt.AddContact"
+﻿<UserControl x:Class="ContactsAttempt.EditContact"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,7 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="1280" Background="AntiqueWhite">
     <Grid>
 
-        <TextBlock TextWrapping="Wrap" Text="Add Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" Grid.RowSpan="2" FontStyle="Italic"/>
+        <TextBlock TextWrapping="Wrap" Text="Edit Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" Grid.RowSpan="2" FontStyle="Italic"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>
