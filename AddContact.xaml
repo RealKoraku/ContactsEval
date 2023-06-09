@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContactsAttempt"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1280" Background="AntiqueWhite">
-    <Grid>
+             d:Height="800" d:Width="1280" Background="AntiqueWhite">
+    <Grid Height="800" VerticalAlignment="Center">
 
-        <TextBlock TextWrapping="Wrap" Text="Add Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" Grid.RowSpan="2" FontStyle="Italic"/>
+        <TextBlock TextWrapping="Wrap" Text="Add Contacts" Height="NaN" Margin="571,10,465,717" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>

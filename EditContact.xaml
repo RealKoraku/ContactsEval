@@ -8,7 +8,7 @@
              d:DesignHeight="800" d:DesignWidth="1280" Background="AntiqueWhite">
     <Grid>
 
-        <TextBlock TextWrapping="Wrap" Text="Edit Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" Grid.RowSpan="2" FontStyle="Italic"/>
+        <TextBlock TextWrapping="Wrap" Text="Edit Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>
@@ -25,7 +25,7 @@
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,453,688,277"/>
         <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
         <RadioButton Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
-        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127"/>
+        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Click="Button_Click"/>
         <Label Content="First name      :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,96,1080,670"/>
         <Label Content="Notes             :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,475,500,291"/>
         <Label Content="Website          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,396,500,370"/>

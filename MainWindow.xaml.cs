@@ -64,12 +64,18 @@ namespace ContactsAttempt {
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
-            NameId.Content = "Hello";
 
+            if (Window.GetWindow(this) is MainWindow mainWindow) {
+                mainWindow.ShowAddScreen();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
+        }
+
+        private void ShowAddScreen() {
+            CC.Content = new AddContact();
         }
 
         private void UpdateContactScreen(Contact currentContact) {

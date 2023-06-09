@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,41 @@ namespace ContactsAttempt {
     public partial class EditContact : UserControl {
         public EditContact() {
             InitializeComponent();
+        }
+
+        private void LoadImage(string path) {
+            //CREATE BITMAP TO HOLD IMAGE DATA
+            BitmapImage bmpImage = new BitmapImage();
+
+            //CREATE URI TO REFERENCE PATH TO IMAGE
+            Uri uriImage = new Uri(path);
+
+            //INIT BITMAP TO LOAD DATA
+            bmpImage.BeginInit();
+            bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
+            bmpImage.EndInit();
+
+            //SET IMAGE CONTROL TO DISPLAY THE IMAGE
+            //ImageId.Source = bmpImage;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.DefaultExt = ".jpg";
+            openFileDialog.Filter = "JPG Files (.jpg)|*.jpg";
+
+            //SHOW FILE DIALOG
+            bool? result = openFileDialog.ShowDialog();
+
+            //PROCESS DIALOG RESULTS / DETERMINE IF FILE WAS OPENED
+            if (result == true) {
+                //STORE FILE PATH
+                string selectedFile = openFileDialog.FileName;
+
+                //CALL LOADIMAGE METHOD
+                LoadImage(selectedFile);
+            }
         }
     }
 }
