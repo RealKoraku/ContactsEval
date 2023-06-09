@@ -23,6 +23,29 @@ namespace ContactsAttempt {
             InitializeComponent();
         }
 
+        private Contact CreateContact(string imagePath) {
+            Contact newContact = new Contact();
+
+            newContact.FirstName = NewFirstName.Text;
+            newContact.MiddleName = NewMidName.Text;
+            newContact.LastName = NewLastName.Text;
+            newContact.Nickname = NewNickname.Text;
+            newContact.Title = NewTitle.Text;
+            newContact.BirthDate = NewBirthdate.Text;
+            newContact.Email = NewEmail.Text;
+            newContact.Phone = NewPhone.Text;
+            newContact.Street = NewStreet.Text;
+            newContact.City = NewCity.Text;
+            newContact.State = NewState.Text;
+            newContact.ZipCode = NewZip.Text;
+            newContact.Country = NewCountry.Text;
+            newContact.Website = NewWebsite.Text;
+            newContact.Notes = NewNotes.Text;
+            newContact.Picture = imagePath;
+
+            return newContact;
+        }
+
         private void LoadImage(string path) {
             //CREATE BITMAP TO HOLD IMAGE DATA
             BitmapImage bmpImage = new BitmapImage();
@@ -39,7 +62,7 @@ namespace ContactsAttempt {
             //imgMain.Source = bmpImage;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void UploadBtn_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.DefaultExt = ".jpg";
@@ -56,6 +79,10 @@ namespace ContactsAttempt {
                 //CALL LOADIMAGE METHOD
                 LoadImage(selectedFile);
             }
+        }
+
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }

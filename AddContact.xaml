@@ -8,40 +8,42 @@
              d:Height="800" d:Width="1280" Background="AntiqueWhite">
     <Grid Height="800" VerticalAlignment="Center">
 
-        <TextBlock TextWrapping="Wrap" Text="Add Contacts" Height="NaN" Margin="571,10,465,717" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,303,688,427"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,228,688,502"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,453,108,277"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,378,108,352"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,303,108,427"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,228,108,502"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,153,108,577"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,678,688,52"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,603,688,127"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,528,688,202"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,453,688,277"/>
-        <TextBox TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
-        <RadioButton Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
-        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127"/>
+        <TextBlock TextWrapping="Wrap" Text="Add Contacts" Height="NaN" Margin="571,18,465,709" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
+        <TextBox Name="NewFirstName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>
+        <TextBox Name="NewMidName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
+        <TextBox Name="NewLastName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,228,688,502"/>
+        <TextBox Name="NewNickname" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,303,688,427"/>
+        <TextBox Name="NewTitle" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
+        <TextBox Name="NewBirthdate" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,453,688,277"/>
+        <TextBox Name="NewEmail" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,528,688,202"/>
+        <TextBox Name="NewPhone" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,603,688,127"/>
+        <TextBox Name="NewStreet" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,678,688,52"/>
+        <TextBox Name="NewCity" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
+        <TextBox Name="NewState" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,153,108,577"/>
+        <TextBox Name="NewZip" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,228,108,502"/>
+        <TextBox Name="NewCountry" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,303,108,427"/>
+        <TextBox Name="NewWebsite" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,378,108,352"/>
+        <TextBox Name="NewNotes" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,453,108,277"/>
+
         <Label Content="First name      :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,96,1080,670"/>
-        <Label Content="Notes             :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,475,500,291"/>
-        <Label Content="Website          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,396,500,370"/>
-        <Label Content="Country          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,321,500,445"/>
-        <Label Content="ZIP                  :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,250,500,516"/>
-        <Label Content="State              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,175,500,591"/>
-        <Label Content="City                 :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,96,500,670"/>
-        <Label Content="Street              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,692,1080,74"/>
-        <Label Content="Phone              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,621,1080,145"/>
-        <Label Content="Email               :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,546,1080,220"/>
-        <Label Content="Birthdate         :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,471,1080,295"/>
-        <Label Content="Title                 :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,396,1080,370"/>
-        <Label Content="Nickname        :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,321,1080,445"/>
-        <Label Content="Last name       :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,246,1080,520"/>
         <Label Content="Middle name   :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,171,1080,595"/>
-        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen"/>
+        <Label Content="Last name       :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,246,1080,520"/>
+        <Label Content="Nickname        :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,321,1080,445"/>
+        <Label Content="Title                 :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,396,1080,370"/>
+        <Label Content="Birthdate         :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,471,1080,295"/>
+        <Label Content="Email               :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,546,1080,220"/>
+        <Label Content="Phone              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,621,1080,145"/>
+        <Label Content="Street              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,692,1080,74"/>
+        <Label Content="City                 :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,96,500,670"/>
+        <Label Content="State              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,175,500,591"/>
+        <Label Content="ZIP                  :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,250,500,516"/>
+        <Label Content="Country          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,321,500,445"/>
+        <Label Content="Website          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,396,500,370"/>
+        <Label Content="Notes             :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,475,500,291"/>
+
+        <RadioButton Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
+        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Click="UploadBtn_Click"/>
+        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen" Click="Button_Click"/>
         <Button Content="Cancel"  FontSize="26" FontFamily="Bahnschrift Light" Margin="980,678,108,52" Background="Red"/>
 
     </Grid>

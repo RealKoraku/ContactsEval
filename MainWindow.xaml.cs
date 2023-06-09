@@ -70,12 +70,23 @@ namespace ContactsAttempt {
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
-        }
-
         private void ShowAddScreen() {
             CC.Content = new AddContact();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e) {
+
+            if (Window.GetWindow(this) is MainWindow mainWindow) {
+                mainWindow.ShowEditScreen();
+            }
+        }
+
+        private void ShowEditScreen() {
+            CC.Content = new EditContact();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+
         }
 
         private void UpdateContactScreen(Contact currentContact) {

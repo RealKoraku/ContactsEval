@@ -39,7 +39,7 @@ namespace ContactsAttempt {
             //ImageId.Source = bmpImage;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void UploadBtn_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.DefaultExt = ".jpg";
