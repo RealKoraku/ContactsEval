@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
         <ListBox Name="ContactsListBox" Margin="2,104,956,10" FontFamily="Bahnschrift Light" FontSize="16"/>
-        <Image Name="ImageId" Margin="373,75,494,404"/>
+        <Image Name="ImageId" Height="300" Width="300" Margin="373,75,597,404"/>
         <Label Name="NameId"  Content="First Name" Margin="698,80,10,640" FontFamily="Bahnschrift Light" FontSize="18" />
         <Label Name="StreetId" Content="Street Address" Margin="698,134,10,585" FontFamily="Bahnschrift Light" FontSize="18"/>
         <Label Name="CityId" Content="City" Margin="699,189,221,535" RenderTransformOrigin="0.476,0.461" FontSize="18" FontFamily="Bahnschrift Light"/>

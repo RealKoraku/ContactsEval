@@ -19,11 +19,13 @@ namespace ContactsAttempt {
     /// Interaction logic for AddContact.xaml
     /// </summary>
     public partial class AddContact : UserControl {
+
+        static string newContactImagePath = "";
         public AddContact() {
             InitializeComponent();
         }
 
-        private Contact CreateContact(string imagePath) {
+        private Contact CreateContact() {
             Contact newContact = new Contact();
 
             newContact.FirstName = NewFirstName.Text;
@@ -31,7 +33,7 @@ namespace ContactsAttempt {
             newContact.LastName = NewLastName.Text;
             newContact.Nickname = NewNickname.Text;
             newContact.Title = NewTitle.Text;
-            newContact.BirthDate = NewBirthdate.Text;
+            //newContact.BirthDate = NewBirthdate.Text;
             newContact.Email = NewEmail.Text;
             newContact.Phone = NewPhone.Text;
             newContact.Street = NewStreet.Text;
@@ -41,25 +43,11 @@ namespace ContactsAttempt {
             newContact.Country = NewCountry.Text;
             newContact.Website = NewWebsite.Text;
             newContact.Notes = NewNotes.Text;
-            newContact.Picture = imagePath;
 
+            if (newContactImagePath != null) {
+                newContact.Picture = newContactImagePath;
+            }
             return newContact;
-        }
-
-        private void LoadImage(string path) {
-            //CREATE BITMAP TO HOLD IMAGE DATA
-            BitmapImage bmpImage = new BitmapImage();
-
-            //CREATE URI TO REFERENCE PATH TO IMAGE
-            Uri uriImage = new Uri(path);
-
-            //INIT BITMAP TO LOAD DATA
-            bmpImage.BeginInit();
-            bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
-            bmpImage.EndInit();
-
-            //SET IMAGE CONTROL TO DISPLAY THE IMAGE
-            //imgMain.Source = bmpImage;
         }
 
         private void UploadBtn_Click(object sender, RoutedEventArgs e) {
@@ -75,14 +63,12 @@ namespace ContactsAttempt {
             if (result == true) {
                 //STORE FILE PATH
                 string selectedFile = openFileDialog.FileName;
-
-                //CALL LOADIMAGE METHOD
-                LoadImage(selectedFile);
+                newContactImagePath = selectedFile;
             }
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
-
+            Contact newContact = CreateContact();
         }
     }
 }

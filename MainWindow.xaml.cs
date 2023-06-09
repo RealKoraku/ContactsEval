@@ -24,13 +24,16 @@ namespace ContactsAttempt {
         static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
 
         public MainWindow() {
-     
             InitializeComponent();
+
             //CC.Content = new HomeScreen();
             bool connected = TestConnection();
-            List<Contact> contacts = GetData();
-            UpdateContactScreen(contacts[1]);
-            ContactsListBox.ItemsSource = contacts;
+
+            Contact.contactsList = GetData();
+            Contact.currentContact = Contact.contactsList[1];
+
+            UpdateContactScreen(Contact.contactsList[1]);
+            ContactsListBox.ItemsSource = Contact.contactsList;
         }
 
         static bool TestConnection() {
@@ -99,6 +102,26 @@ namespace ContactsAttempt {
             PhoneId.Content = currentContact.Phone;
             WebId.Content = currentContact.Website;
             NotesId.Content = currentContact.Notes;
+
+            if (currentContact.Picture != null) {
+                LoadImage(currentContact.Picture);
+            }
+        }
+
+        private void LoadImage(string path) {
+            //CREATE BITMAP TO HOLD IMAGE DATA
+            BitmapImage bmpImage = new BitmapImage();
+
+            //CREATE URI TO REFERENCE PATH TO IMAGE
+            Uri uriImage = new Uri(path);
+
+            //INIT BITMAP TO LOAD DATA
+            bmpImage.BeginInit();
+            bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
+            bmpImage.EndInit();
+
+            //SET IMAGE CONTROL TO DISPLAY THE IMAGE
+            ImageId.Source = bmpImage;
         }
     }
 }

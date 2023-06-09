@@ -9,7 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactsAttempt {
+
     public class Contact {
+
+        public static Contact currentContact { get; set; }
+        public static List<Contact> contactsList { get; set; }
 
         public string DataId { get; set; }
         public string FirstName { get; set; }

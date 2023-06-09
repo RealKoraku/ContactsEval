@@ -13,30 +13,79 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Dapper;
+using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
+using System.IO;
+using System.Reflection.Emit;
 
 namespace ContactsAttempt {
     /// <summary>
     /// Interaction logic for EditContact.xaml
     /// </summary>
     public partial class EditContact : UserControl {
+
+        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string ContactImagePath = "";
+        static string firstName = Contact.currentContact.FirstName;
+        static string lastName = Contact.currentContact.LastName;
+
         public EditContact() {
             InitializeComponent();
+            PopulateEditBoxes(Contact.currentContact);
         }
 
-        private void LoadImage(string path) {
-            //CREATE BITMAP TO HOLD IMAGE DATA
-            BitmapImage bmpImage = new BitmapImage();
+        private void PopulateEditBoxes(Contact selectedContact) {
+            EditFirstName.Text = selectedContact.FirstName;
+            EditMidName.Text = selectedContact.MiddleName;
+            EditLastName.Text = selectedContact.LastName;
+            EditNickname.Text = selectedContact.Nickname;
+            EditTitle.Text = selectedContact.Title;
+            EditBirthdate.Text = selectedContact.BirthDate;
+            EditEmail.Text = selectedContact.Email;
+            EditPhone.Text = selectedContact.Phone;
+            EditStreet.Text = selectedContact.Street;
+            EditCity.Text = selectedContact.City;
+            EditState.Text = selectedContact.State;
+            EditZip.Text = selectedContact.ZipCode;
+            EditCountry.Text = selectedContact.Country;
+            EditWebsite.Text = selectedContact.Website;
+            EditNotes.Text = selectedContact.Notes;
+        }
 
-            //CREATE URI TO REFERENCE PATH TO IMAGE
-            Uri uriImage = new Uri(path);
+        private Contact UpdateContact(Contact selectedContact) {
 
-            //INIT BITMAP TO LOAD DATA
-            bmpImage.BeginInit();
-            bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
-            bmpImage.EndInit();
+            selectedContact.FirstName = EditFirstName.Text;
+            selectedContact.MiddleName = EditMidName.Text;
+            selectedContact.LastName = EditLastName.Text;
+            selectedContact.Nickname = EditNickname.Text;
+            selectedContact.Title = EditTitle.Text;
+            selectedContact.BirthDate = EditBirthdate.Text;
+            selectedContact.Email = EditEmail.Text;
+            selectedContact.Phone = EditPhone.Text;
+            selectedContact.Street = EditStreet.Text;
+            selectedContact.City = EditCity.Text;
+            selectedContact.State = EditState.Text;
+            selectedContact.ZipCode = EditZip.Text;
+            selectedContact.Country = EditCountry.Text;
+            selectedContact.Website = EditWebsite.Text;
+            selectedContact.Notes = EditNotes.Text;
 
-            //SET IMAGE CONTROL TO DISPLAY THE IMAGE
-            //ImageId.Source = bmpImage;
+            if (ContactImagePath != null) {
+                selectedContact.Picture = ContactImagePath;
+            }
+
+            var connection = new SqlConnection(connectionString);
+
+            using (connection) {
+                connection.Query<Contact>($"UPDATE tblContact " +
+                    $"SET firstName = {selectedContact.FirstName}, middleName = {selectedContact.MiddleName}, lastName {selectedContact.LastName}, nickname = {selectedContact.Nickname}, title = {selectedContact.Title}," +
+                    $"email = {selectedContact.Email}, phone = {selectedContact.Phone}, street = {selectedContact.Street}, city = {selectedContact.City}, state = {selectedContact.State}, zipCode = {selectedContact.ZipCode}, country = {selectedContact.Country}, " +
+                    $"website = {selectedContact.Website}, notes = {selectedContact.Notes}" +
+                    $"WHERE firstName = {firstName}, lastName = {lastName}");
+            }
+
+            return selectedContact;
         }
 
         private void UploadBtn_Click(object sender, RoutedEventArgs e) {
@@ -52,9 +101,7 @@ namespace ContactsAttempt {
             if (result == true) {
                 //STORE FILE PATH
                 string selectedFile = openFileDialog.FileName;
-
-                //CALL LOADIMAGE METHOD
-                LoadImage(selectedFile);
+                ContactImagePath = selectedFile;
             }
         }
     }

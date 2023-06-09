@@ -43,7 +43,7 @@
 
         <RadioButton Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
         <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Click="UploadBtn_Click"/>
-        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen" Click="Button_Click"/>
+        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen"/>
         <Button Content="Cancel"  FontSize="26" FontFamily="Bahnschrift Light" Margin="980,678,108,52" Background="Red"/>
 
     </Grid>
