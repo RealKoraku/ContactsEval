@@ -69,6 +69,12 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
             Contact newContact = CreateContact();
+            Contact.contactsList.Add(newContact);
+            //CC.Content = new MainWindow();
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e) {
+            //CC.Content = new MainWindow();
         }
     }
 }

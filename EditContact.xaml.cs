@@ -79,10 +79,10 @@ namespace ContactsAttempt {
 
             using (connection) {
                 connection.Query<Contact>($"UPDATE tblContact " +
-                    $"SET firstName = {selectedContact.FirstName}, middleName = {selectedContact.MiddleName}, lastName {selectedContact.LastName}, nickname = {selectedContact.Nickname}, title = {selectedContact.Title}," +
-                    $"email = {selectedContact.Email}, phone = {selectedContact.Phone}, street = {selectedContact.Street}, city = {selectedContact.City}, state = {selectedContact.State}, zipCode = {selectedContact.ZipCode}, country = {selectedContact.Country}, " +
-                    $"website = {selectedContact.Website}, notes = {selectedContact.Notes}" +
-                    $"WHERE firstName = {firstName}, lastName = {lastName}");
+                    $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
+                    $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +
+                    $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}' " +
+                    $"WHERE firstName = '{firstName}'");
             }
 
             return selectedContact;
@@ -103,6 +103,15 @@ namespace ContactsAttempt {
                 string selectedFile = openFileDialog.FileName;
                 ContactImagePath = selectedFile;
             }
+        }
+
+        private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
+            Contact.currentContact = UpdateContact(Contact.currentContact);
+            //CC.Content = new MainWindow();
+        }
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e) {
+            //CC.Content = new MainWindow();
         }
     }
 }
