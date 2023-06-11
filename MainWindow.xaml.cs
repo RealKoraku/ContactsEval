@@ -36,6 +36,8 @@ namespace ContactsAttempt {
             ContactsListBox.ItemsSource = Contact.contactsList;
         }
 
+        #region SQL
+
         static bool TestConnection() {
             try {
                 SqlConnection connection = new SqlConnection(connectionString);
@@ -55,16 +57,9 @@ namespace ContactsAttempt {
             }
         }
 
-        private List<Contact> AddContact(List<Contact> contacts) {
-            Contact addedContact = new Contact();
-            var connection = new SqlConnection(connectionString);
+        #endregion
 
-            using(connection) {
-                connection.Query<Contact>("INSERT INTO");
-            }
-            contacts.Add(addedContact);
-            return contacts;
-        }
+        #region Buttons
 
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
 
@@ -73,15 +68,26 @@ namespace ContactsAttempt {
             }
         }
 
-        private void ShowAddScreen() {
-            CC.Content = new AddContact();
-        }
-
         private void btnEdit_Click(object sender, RoutedEventArgs e) {
 
             if (Window.GetWindow(this) is MainWindow mainWindow) {
                 mainWindow.ShowEditScreen();
             }
+        }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e) {
+            string searchTerm = SearchId.Text;
+        }
+
+        private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
+        }
+
+        #endregion
+
+        #region XAML controls
+
+        private void ShowAddScreen() {
+            CC.Content = new AddContact();
         }
 
         private void ShowEditScreen() {
@@ -123,5 +129,7 @@ namespace ContactsAttempt {
             //SET IMAGE CONTROL TO DISPLAY THE IMAGE
             ImageId.Source = bmpImage;
         }
+
+        #endregion
     }
 }

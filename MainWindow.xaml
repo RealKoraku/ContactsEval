@@ -12,7 +12,7 @@
             <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
         <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <ListBox Name="ContactsListBox" Margin="2,104,956,10" FontFamily="Bahnschrift Light" FontSize="16"/>
+        <ListBox Name="ContactsListBox" Margin="2,134,956,10" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Image Name="ImageId" Height="300" Width="300" Margin="373,75,597,404"/>
         <Label Name="NameId"  Content="First Name" Margin="698,80,10,640" FontFamily="Bahnschrift Light" FontSize="18" />
         <Label Name="StreetId" Content="Street Address" Margin="698,134,10,585" FontFamily="Bahnschrift Light" FontSize="18"/>
@@ -22,7 +22,7 @@
         <Label Name="EmailId" Content="Email" Margin="698,244,8,475" FontSize="18" FontFamily="Bahnschrift Light"/>
         <Label Name="PhoneId" Content="Phone" Margin="698,299,10,408" FontSize="18" FontFamily="Bahnschrift Light" />
 
-        <TextBox Name="SearchId" Text="Search..." Margin="10,29,956,690" FontFamily="Bahnschrift Light" FontSize="18"/>
+        <TextBox Name="SearchId" Text="Search..." Margin="10,62,956,655" FontFamily="Bahnschrift Light" FontSize="18"/>
         <Label Name="WebId" Content="Website" Margin="374,420,8,288" RenderTransformOrigin="0.349,0.035" FontSize="18" FontFamily="Bahnschrift Light"/>
         <Label Name="WebBlock" Content="Website address" Margin="374,386,603,328" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Label Name="notesBlock" Content="Notes" Margin="374,471,682,248" FontFamily="Bahnschrift Light" FontSize="16"/>
@@ -32,6 +32,8 @@
         <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>
 
         <ContentControl x:Name="CC" Grid.Column="0"/>
+        <Button Content="Search" Margin="324,62,851,657" Click="SearchBtn_Click"/>
+        <Button Content="Search options" Margin="10,10,956,717" Click="OptionsBtn_Click"/>
 
     </Grid>
 </Window>
