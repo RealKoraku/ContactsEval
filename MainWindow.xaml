@@ -30,10 +30,10 @@
         <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18"/>
         <Button Content="Edit Contact"   Name="btnEdit" Margin="685,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click"/>
         <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>
+        <Button Content="Search" Margin="324,62,851,657" Click="SearchBtn_Click"/>
+        <Button Content="Search options" Margin="10,10,956,717" Click="OptionsBtn_Click" />
 
         <ContentControl x:Name="CC" Grid.Column="0"/>
-        <Button Content="Search" Margin="324,62,851,657" Click="SearchBtn_Click"/>
-        <Button Content="Search options" Margin="10,10,956,717" Click="OptionsBtn_Click"/>
 
     </Grid>
 </Window>

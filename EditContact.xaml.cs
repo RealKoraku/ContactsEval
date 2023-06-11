@@ -41,7 +41,7 @@ namespace ContactsAttempt {
             EditLastName.Text = selectedContact.LastName;
             EditNickname.Text = selectedContact.Nickname;
             EditTitle.Text = selectedContact.Title;
-            EditBirthdate.Text = selectedContact.BirthDate;
+            //EditBirthdate.Text = selectedContact.BirthDate;
             EditEmail.Text = selectedContact.Email;
             EditPhone.Text = selectedContact.Phone;
             EditStreet.Text = selectedContact.Street;
@@ -60,7 +60,7 @@ namespace ContactsAttempt {
             selectedContact.LastName = EditLastName.Text;
             selectedContact.Nickname = EditNickname.Text;
             selectedContact.Title = EditTitle.Text;
-            selectedContact.BirthDate = EditBirthdate.Text;
+            //selectedContact.BirthDate = EditBirthdate.Text;
             selectedContact.Email = EditEmail.Text;
             selectedContact.Phone = EditPhone.Text;
             selectedContact.Street = EditStreet.Text;

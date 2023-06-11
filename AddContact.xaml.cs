@@ -46,9 +46,10 @@ namespace ContactsAttempt {
             if (NewTitle.Text != null) {
                 newContact.Title = NewTitle.Text;
             }
-            if (NewBirthdate.Text != null) {
+            //if (NewDay.Text != null && NewMonth.Text != null && NewYear.Text != null) {
                 //newContact.BirthDate = NewBirthdate.Text;
-            }
+            //}
+
             if (NewEmail.Text != null) {
                 newContact.Email = NewEmail.Text;
             }
@@ -82,14 +83,13 @@ namespace ContactsAttempt {
             return newContact;
         }
 
-        private void AddContact() {
-            Contact addedContact = new Contact();
+        private void AddContactToDatabase(Contact newContact) {
             var connection = new SqlConnection(connectionString);
 
             using (connection) {
                 connection.Query<Contact>("INSERT INTO tblContact");
             }
-            Contact.contactsList.Add(addedContact);;
+            Contact.contactsList.Add(newContact);
         }
 
         private void UploadBtn_Click(object sender, RoutedEventArgs e) {
@@ -111,7 +111,7 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
             Contact newContact = CreateContact();
-            Contact.contactsList.Add(newContact);
+            AddContactToDatabase(newContact);
             //CC.Content = new MainWindow();
 
         }
