@@ -26,14 +26,16 @@ namespace ContactsAttempt {
         public MainWindow() {
             InitializeComponent();
 
-            //CC.Content = new HomeScreen();
             bool connected = TestConnection();
 
-            Contact.contactsList = GetData();
-            Contact.currentContact = Contact.contactsList[1];
+            if (connected) {
 
-            UpdateContactScreen(Contact.contactsList[1]);
-            ContactsListBox.ItemsSource = Contact.contactsList;
+                Contact.contactsList = GetData();
+                Contact.currentContact = Contact.contactsList[0];
+
+                CC.Content = new HomeScreen();
+
+            }
         }
 
         #region SQL
@@ -61,74 +63,74 @@ namespace ContactsAttempt {
 
         #region Buttons
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e) {
-
-            if (Window.GetWindow(this) is MainWindow mainWindow) {
-                mainWindow.ShowAddScreen();
-            }
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e) {
-
-            if (Window.GetWindow(this) is MainWindow mainWindow) {
-                mainWindow.ShowEditScreen();
-            }
-        }
-
-        private void SearchBtn_Click(object sender, RoutedEventArgs e) {
-            string searchTerm = SearchId.Text;
-        }
-
-        private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
-        }
+        //private void btnAdd_Click(object sender, RoutedEventArgs e) {
+        //
+        //    if (Window.GetWindow(this) is MainWindow mainWindow) {
+        //        mainWindow.ShowAddScreen();
+        //    }
+        //}
+        //
+        //private void btnEdit_Click(object sender, RoutedEventArgs e) {
+        //
+        //    if (Window.GetWindow(this) is MainWindow mainWindow) {
+        //        mainWindow.ShowEditScreen();
+        //    }
+        //}
+        //
+        //private void SearchBtn_Click(object sender, RoutedEventArgs e) {
+        //    string searchTerm = SearchId.Text;
+        //}
+        //
+        //private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
+        //}
 
         #endregion
 
         #region XAML controls
 
-        private void ShowAddScreen() {
-            CC.Content = new AddContact();
-        }
+        //private void ShowAddScreen() {
+        //    CC.Content = new AddContact();
+        //}
 
-        private void ShowEditScreen() {
-            CC.Content = new EditContact();
-        }
+        //private void ShowEditScreen() {
+        //    CC.Content = new EditContact();
+        //}
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
         }
 
-        private void UpdateContactScreen(Contact currentContact) {
-            NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
-            StreetId.Content = currentContact.Street;
-            CityId.Content = currentContact.City;
-            StateId.Content = currentContact.State;
-            ZipId.Content = currentContact.ZipCode;
-            EmailId.Content = currentContact.Email;
-            PhoneId.Content = currentContact.Phone;
-            WebId.Content = currentContact.Website;
-            NotesId.Content = currentContact.Notes;
+        //private void UpdateContactScreen(Contact currentContact) {
+        //    NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
+        //    StreetId.Content = currentContact.Street;
+        //    CityId.Content = currentContact.City;
+        //    StateId.Content = currentContact.State;
+        //    ZipId.Content = currentContact.ZipCode;
+        //    EmailId.Content = currentContact.Email;
+        //    PhoneId.Content = currentContact.Phone;
+        //    WebId.Content = currentContact.Website;
+        //    NotesId.Content = currentContact.Notes;
 
-            if (currentContact.Picture != null) {
-                LoadImage(currentContact.Picture);
-            }
-        }
+        //    if (currentContact.Picture != null) {
+        //        LoadImage(currentContact.Picture);
+        //    }
+        //}
 
-        private void LoadImage(string path) {
-            //CREATE BITMAP TO HOLD IMAGE DATA
-            BitmapImage bmpImage = new BitmapImage();
+        //private void LoadImage(string path) {
+        //    //CREATE BITMAP TO HOLD IMAGE DATA
+        //    BitmapImage bmpImage = new BitmapImage();
 
-            //CREATE URI TO REFERENCE PATH TO IMAGE
-            Uri uriImage = new Uri(path);
+        //    //CREATE URI TO REFERENCE PATH TO IMAGE
+        //    Uri uriImage = new Uri(path);
 
-            //INIT BITMAP TO LOAD DATA
-            bmpImage.BeginInit();
-            bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
-            bmpImage.EndInit();
+        //    //INIT BITMAP TO LOAD DATA
+        //    bmpImage.BeginInit();
+        //    bmpImage.UriSource = uriImage; //TELL BITMAP WHERE TO FIND IMAGE VIA URI
+        //    bmpImage.EndInit();
 
-            //SET IMAGE CONTROL TO DISPLAY THE IMAGE
-            ImageId.Source = bmpImage;
-        }
+        //    //SET IMAGE CONTROL TO DISPLAY THE IMAGE
+        //    ImageId.Source = bmpImage;
+        //}
 
         #endregion
     }

@@ -51,16 +51,39 @@ namespace ContactsAttempt {
             EditCountry.Text = selectedContact.Country;
             EditWebsite.Text = selectedContact.Website;
             EditNotes.Text = selectedContact.Notes;
+
+            string birthDate = selectedContact.BirthDate;
+
+            string month = "";
+            string day = "";
+            string year = "";
+
+            for (int i = 0; i < birthDate.Length; i++) {
+                if (i < 2) {
+                    month += birthDate[i];
+                }
+                if (i > 2 && i < 5) {
+                    day += birthDate[i];
+                }
+                if (i > 5 && i < 10) {
+                    year += birthDate[i];
+                }
+            }
+            EditMonth.Text = month;
+            EditDay.Text = day;
+            EditYear.Text = year;
         }
 
         private Contact UpdateContact(Contact selectedContact) {
+
+            string birthDateString = $"{EditYear.Text}-{EditMonth.Text}-{EditDay.Text}";
+            string favString;
 
             selectedContact.FirstName = EditFirstName.Text;
             selectedContact.MiddleName = EditMidName.Text;
             selectedContact.LastName = EditLastName.Text;
             selectedContact.Nickname = EditNickname.Text;
             selectedContact.Title = EditTitle.Text;
-            //selectedContact.BirthDate = EditBirthdate.Text;
             selectedContact.Email = EditEmail.Text;
             selectedContact.Phone = EditPhone.Text;
             selectedContact.Street = EditStreet.Text;
@@ -70,6 +93,17 @@ namespace ContactsAttempt {
             selectedContact.Country = EditCountry.Text;
             selectedContact.Website = EditWebsite.Text;
             selectedContact.Notes = EditNotes.Text;
+            selectedContact.BirthDate = birthDateString;
+
+            bool favorite = (bool)btnFavorite.IsChecked;
+
+            if (favorite) {
+                selectedContact.IsFavorite = true;
+                favString = "1";
+            } else {
+                selectedContact.IsFavorite = false;
+                favString = "0";
+            }
 
             if (ContactImagePath != null) {
                 selectedContact.Picture = ContactImagePath;
@@ -80,11 +114,12 @@ namespace ContactsAttempt {
             using (connection) {
                 connection.Query<Contact>($"UPDATE tblContact " +
                     $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
+                    $"birthDate = '{birthDateString}', "+
                     $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +
-                    $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}' " +
+                    $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}', isFavorite = '{favString}', isActive = '1'" +
                     $"WHERE firstName = '{firstName}'");
             }
-
+            
             return selectedContact;
         }
 
@@ -111,7 +146,7 @@ namespace ContactsAttempt {
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e) {
-            //CC.Content = new MainWindow();
+            CC.Content = new HomeScreen();
         }
     }
 }

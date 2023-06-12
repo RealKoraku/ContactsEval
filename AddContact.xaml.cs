@@ -31,6 +31,8 @@ namespace ContactsAttempt {
         private Contact CreateContact() {
             Contact newContact = new Contact();
 
+            string favString;
+
             if (NewFirstName.Text != null) {
                 newContact.FirstName = NewFirstName.Text;
             }
@@ -46,9 +48,12 @@ namespace ContactsAttempt {
             if (NewTitle.Text != null) {
                 newContact.Title = NewTitle.Text;
             }
-            //if (NewDay.Text != null && NewMonth.Text != null && NewYear.Text != null) {
-                //newContact.BirthDate = NewBirthdate.Text;
-            //}
+            if (NewDay.Text != null && NewMonth.Text != null && NewYear.Text != null) {
+
+                string birthDateString = $"{NewYear.Text}-{NewMonth.Text}-{NewDay.Text}";
+
+                newContact.BirthDate = birthDateString;
+            }
 
             if (NewEmail.Text != null) {
                 newContact.Email = NewEmail.Text;
@@ -80,6 +85,19 @@ namespace ContactsAttempt {
             if (newContactImagePath != null) {
                 newContact.Picture = newContactImagePath;
             }
+
+            bool favorite = (bool)btnFavorite.IsChecked;
+
+            if (favorite) {
+                newContact.IsFavorite = true;
+                favString = "1";
+            } else {
+                newContact.IsFavorite = false;
+                favString = "0";
+            }
+
+            newContact.IsActive = true;
+
             return newContact;
         }
 
@@ -117,7 +135,7 @@ namespace ContactsAttempt {
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e) {
-            //CC.Content = new MainWindow();
+            CC.Content = new HomeScreen();
         }
     }
 }
