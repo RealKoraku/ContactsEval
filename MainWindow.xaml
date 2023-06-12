@@ -11,7 +11,7 @@
             <ColumnDefinition Width="1280"/>
             <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
-        
+
         <!--
         <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
         <ListBox Name="ContactsListBox" Margin="2,134,956,10" FontFamily="Bahnschrift Light" FontSize="16"/>
@@ -35,8 +35,13 @@
         <Button Content="Search" Margin="324,62,851,657" Click="SearchBtn_Click"/>
         <Button Content="Search options" Margin="10,10,956,717" Click="OptionsBtn_Click" />
         -->
-        
+
+        <Label Content="Enter database name:" Margin="300,240,320,461" FontSize="26" FontFamily="Bahnschrift"/>
+        <TextBox Name="DatabaseBox" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift" Margin="300,289,199,427"/>
+        <Label Name="FailedLbl" Content="Connection Failed"  Margin="300,360,320,350" FontSize="26" FontFamily="Bahnschrift" Opacity="0" Foreground="DarkRed"/>
+
         <ContentControl x:Name="CC" Grid.Column="0"/>
+        <Button Name="EnterBtn" Content="Enter" Margin="1086,289,75,427" Background="LightGreen" Click="EnterBtn_Click"/>
 
     </Grid>
 </Window>

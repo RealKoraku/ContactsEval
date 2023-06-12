@@ -12,10 +12,11 @@ namespace ContactsAttempt {
 
     public class Contact {
 
+        public static string DatabaseName { get; set; }
         public static Contact currentContact { get; set; }
         public static List<Contact> contactsList { get; set; }
 
-        public string DataId { get; set; }
+        public int DataId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

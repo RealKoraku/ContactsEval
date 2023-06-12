@@ -22,7 +22,7 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class AddContact : UserControl {
 
-        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
         static string newContactImagePath = "";
         public AddContact() {
             InitializeComponent();
@@ -103,11 +103,22 @@ namespace ContactsAttempt {
 
         private void AddContactToDatabase(Contact newContact) {
             var connection = new SqlConnection(connectionString);
+            string favString;
+
+            if (newContact.IsFavorite) {
+                favString = "1";
+            } else {
+                favString = "0";
+            }
 
             using (connection) {
-                connection.Query<Contact>("INSERT INTO tblContact");
+                connection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, isFavorite, isActive) " +
+                    $"VALUES ('{newContact.FirstName}', '{newContact.MiddleName}', '{newContact.LastName}', '{newContact.Nickname}', '{newContact.Title}', " +
+                    $"'{newContact.BirthDate}', '{newContact.Email}', '{newContact.Phone}', '{newContact.Street}', '{newContact.City}', '{newContact.State}', '{newContact.ZipCode}', '{newContact.Country}', " +
+                    $"'{newContact.Website}', '{newContact.Notes}', '{favString}', '1')");
             }
             Contact.contactsList.Add(newContact);
+            CC.Content = new HomeScreen();
         }
 
         private void UploadBtn_Click(object sender, RoutedEventArgs e) {

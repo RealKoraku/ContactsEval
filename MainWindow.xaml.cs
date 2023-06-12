@@ -21,33 +21,26 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class MainWindow : Window {
 
-        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
 
         public MainWindow() {
             InitializeComponent();
 
-            bool connected = TestConnection();
-
-            if (connected) {
-
-                Contact.contactsList = GetData();
-                Contact.currentContact = Contact.contactsList[0];
-
-                CC.Content = new HomeScreen();
-
-            }
         }
 
         #region SQL
 
         static bool TestConnection() {
+            SqlConnection connection = new SqlConnection(connectionString);
             try {
-                SqlConnection connection = new SqlConnection(connectionString);
-                connection.Open();
-                connection.Close();
-                return true;
+                using (connection) {
 
-            } catch (Exception exception) {
+                    connection.Open();
+                    connection.Close();
+                    return true;
+                }
+
+                } catch (Exception exception) {
                 return false;
             }
         }
@@ -133,5 +126,34 @@ namespace ContactsAttempt {
         //}
 
         #endregion
+
+        private void EnterBtn_Click(object sender, RoutedEventArgs e) {
+            Contact.DatabaseName = DatabaseBox.Text;
+
+            if (Contact.DatabaseName == "") {
+                FailedLbl.Content = "Name cannot be null";
+                FailedLbl.Opacity = 100;
+                return;
+            }
+
+            connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
+
+            bool connected = TestConnection();
+
+            if (connected) {
+
+                FailedLbl.Opacity = 0;
+
+                EnterBtn.Visibility = Visibility.Collapsed;
+
+                Contact.contactsList = GetData();
+                Contact.currentContact = Contact.contactsList[1];
+
+                CC.Content = new HomeScreen();
+            } else {
+                FailedLbl.Content = "Connection Failed";
+                FailedLbl.Opacity = 100;
+            }
+        }
     }
 }

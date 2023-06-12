@@ -15,11 +15,14 @@ using System.Windows.Shapes;
 
 namespace ContactsAttempt {
     /// <summary>
-    /// Interaction logic for HomeScreen.xaml
+    /// Interaction logic for HomeScreen.xaml+
+    /// 
+    /// 
+    /// 
     /// </summary>
     public partial class HomeScreen : UserControl {
 
-        static string connectionString = "Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
 
         public HomeScreen() {
             InitializeComponent();
@@ -42,6 +45,10 @@ namespace ContactsAttempt {
             if (Window.GetWindow(this) is MainWindow mainWindow) {
                 ShowEditScreen();
             }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e) {
+
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
