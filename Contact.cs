@@ -15,6 +15,7 @@ namespace ContactsAttempt {
         public static string DatabaseName { get; set; }
         public static Contact currentContact { get; set; }
         public static List<Contact> contactsList { get; set; }
+        public static List<Contact> activeContactsList { get; set; }
 
         public int DataId { get; set; }
         public string FirstName { get; set; }

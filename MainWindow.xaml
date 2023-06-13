@@ -12,30 +12,6 @@
             <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
 
-        <!--
-        <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <ListBox Name="ContactsListBox" Margin="2,134,956,10" FontFamily="Bahnschrift Light" FontSize="16"/>
-        <Image Name="ImageId" Height="300" Width="300" Margin="373,75,597,404"/>
-        <Label Name="NameId"  Content="First Name" Margin="698,80,10,640" FontFamily="Bahnschrift Light" FontSize="18" />
-        <Label Name="StreetId" Content="Street Address" Margin="698,134,10,585" FontFamily="Bahnschrift Light" FontSize="18"/>
-        <Label Name="CityId" Content="City" Margin="699,189,221,535" RenderTransformOrigin="0.476,0.461" FontSize="18" FontFamily="Bahnschrift Light"/>
-        <Label Name="StateId" Content="State" Margin="946,189,80,535" FontSize="18" FontFamily="Bahnschrift Light"/>
-        <Label Name="ZipId" Content="ZIP" Margin="1087,189,10,535" FontSize="18" FontFamily="Bahnschrift Light" />
-        <Label Name="EmailId" Content="Email" Margin="698,244,8,475" FontSize="18" FontFamily="Bahnschrift Light"/>
-        <Label Name="PhoneId" Content="Phone" Margin="698,299,10,408" FontSize="18" FontFamily="Bahnschrift Light" />
-
-        <TextBox Name="SearchId" Text="Search..." Margin="10,62,956,655" FontFamily="Bahnschrift Light" FontSize="18"/>
-        <Label Name="WebId" Content="Website" Margin="374,420,8,288" RenderTransformOrigin="0.349,0.035" FontSize="18" FontFamily="Bahnschrift Light"/>
-        <Label Name="WebBlock" Content="Website address" Margin="374,386,603,328" FontFamily="Bahnschrift Light" FontSize="16"/>
-        <Label Name="notesBlock" Content="Notes" Margin="374,471,682,248" FontFamily="Bahnschrift Light" FontSize="16"/>
-        <Label Name="NotesId" Content="Sample note" Margin="374,500,10,128" FontFamily="Bahnschrift Light" FontSize="18" />
-        <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18"/>
-        <Button Content="Edit Contact"   Name="btnEdit" Margin="685,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click"/>
-        <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>
-        <Button Content="Search" Margin="324,62,851,657" Click="SearchBtn_Click"/>
-        <Button Content="Search options" Margin="10,10,956,717" Click="OptionsBtn_Click" />
-        -->
-
         <Label Content="Enter database name:" Margin="300,240,320,461" FontSize="26" FontFamily="Bahnschrift"/>
         <TextBox Name="DatabaseBox" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift" Margin="300,289,199,427"/>
         <Label Name="FailedLbl" Content="Connection Failed"  Margin="300,360,320,350" FontSize="26" FontFamily="Bahnschrift" Opacity="0" Foreground="DarkRed"/>

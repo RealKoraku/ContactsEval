@@ -41,7 +41,6 @@ namespace ContactsAttempt {
             EditLastName.Text = selectedContact.LastName;
             EditNickname.Text = selectedContact.Nickname;
             EditTitle.Text = selectedContact.Title;
-            //EditBirthdate.Text = selectedContact.BirthDate;
             EditEmail.Text = selectedContact.Email;
             EditPhone.Text = selectedContact.Phone;
             EditStreet.Text = selectedContact.Street;

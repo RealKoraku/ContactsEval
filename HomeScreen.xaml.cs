@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 namespace ContactsAttempt {
     /// <summary>
     /// Interaction logic for HomeScreen.xaml+
-    /// 
-    /// 
-    /// 
     /// </summary>
     public partial class HomeScreen : UserControl {
 
@@ -26,9 +23,10 @@ namespace ContactsAttempt {
 
         public HomeScreen() {
             InitializeComponent();
-
+            Contact.activeContactsList = CheckActiveContacts();
+            Contact.currentContact = Contact.activeContactsList[1];
             UpdateContactScreen(Contact.currentContact);
-            ContactsListBox.ItemsSource = Contact.contactsList;
+            ContactsListBox.ItemsSource = Contact.activeContactsList;
         }
 
         #region Buttons
@@ -56,6 +54,7 @@ namespace ContactsAttempt {
         }
 
         private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
+
         }
 
         #endregion
@@ -74,8 +73,31 @@ namespace ContactsAttempt {
 
         }
 
+        private List<Contact> CheckActiveContacts() {
+            Contact.activeContactsList = new List<Contact>();
+
+            for (int i = 0; i < Contact.contactsList.Count; i++) {
+                if (Contact.contactsList[i].IsActive) {
+                    Contact.activeContactsList.Add(Contact.contactsList[i]);
+                } 
+            }
+            return Contact.activeContactsList;
+        }
+
+        private void ListContacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            // When listbox item is clicked
+            var selectedItem = (ListBox)sender;
+            Contact.currentContact = (Contact)selectedItem.SelectedItem;
+
+            UpdateContactScreen(Contact.currentContact);
+        }// End function
+
         private void UpdateContactScreen(Contact currentContact) {
-            NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
+            if (currentContact.Nickname != null && currentContact.Nickname != "") {
+                NameId.Content = currentContact.Nickname + " " + $"({currentContact.FirstName})" + " " + currentContact.MiddleName + " " + currentContact.LastName;
+            } else {
+                NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
+            }
             StreetId.Content = currentContact.Street;
             CityId.Content = currentContact.City;
             StateId.Content = currentContact.State;
@@ -85,7 +107,7 @@ namespace ContactsAttempt {
             WebId.Content = currentContact.Website;
             NotesId.Content = currentContact.Notes;
 
-            if (currentContact.Picture != null) {
+            if (currentContact.Picture != null && currentContact.Picture != "") {
                 LoadImage(currentContact.Picture);
             }
         }
