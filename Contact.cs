@@ -17,7 +17,7 @@ namespace ContactsAttempt {
         public static List<Contact> contactsList { get; set; }
         public static List<Contact> activeContactsList { get; set; }
 
-        public int DataId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -38,7 +38,12 @@ namespace ContactsAttempt {
         public bool IsActive { get; set; }
 
         public override string ToString() {
-            return $"{FirstName} {LastName}";
+
+            if (IsFavorite) {
+                return $"★ {FirstName} {LastName}";
+            } else {
+                return $"{FirstName} {LastName}";
+            }
         }
     }
 }

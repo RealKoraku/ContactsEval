@@ -113,10 +113,10 @@ namespace ContactsAttempt {
             using (connection) {
                 connection.Query<Contact>($"UPDATE tblContact " +
                     $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
-                    $"birthDate = '{birthDateString}', "+
+                    $"birthDate = '{birthDateString}', " +
                     $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +
-                    $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}', isFavorite = '{favString}', isActive = '1'" +
-                    $"WHERE firstName = '{firstName}'");
+                    $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}', picture = '{ContactImagePath}', isFavorite = '{favString}', isActive = '1'" +
+                    $"WHERE id = '{selectedContact.Id}'");
             }
             
             return selectedContact;
@@ -141,7 +141,7 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
             Contact.currentContact = UpdateContact(Contact.currentContact);
-            //CC.Content = new MainWindow();
+            CC.Content = new HomeScreen();
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e) {

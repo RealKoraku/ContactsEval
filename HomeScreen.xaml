@@ -27,6 +27,7 @@
         <Label Name="WebBlock" Content="Website address" Margin="374,386,603,328" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Label Name="notesBlock" Content="Notes" Margin="374,471,682,248" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Label Name="NotesId" Content="Sample note" Margin="374,500,10,128" FontFamily="Bahnschrift Light" FontSize="18" />
+        <Label Name="IdId" Content="Sample Id" Margin="794,330,10,408" FontFamily="Bahnschrift Light" FontSize="18" />
         <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnDelete_Click"/>
         <Button Content="Edit Contact"   Name="btnEdit" Margin="685,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click"/>
         <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>

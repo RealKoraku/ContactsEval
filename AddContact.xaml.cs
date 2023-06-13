@@ -112,10 +112,10 @@ namespace ContactsAttempt {
             }
 
             using (connection) {
-                connection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, isFavorite, isActive) " +
+                connection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, picture, isFavorite, isActive) " +
                     $"VALUES ('{newContact.FirstName}', '{newContact.MiddleName}', '{newContact.LastName}', '{newContact.Nickname}', '{newContact.Title}', " +
                     $"'{newContact.BirthDate}', '{newContact.Email}', '{newContact.Phone}', '{newContact.Street}', '{newContact.City}', '{newContact.State}', '{newContact.ZipCode}', '{newContact.Country}', " +
-                    $"'{newContact.Website}', '{newContact.Notes}', '{favString}', '1')");
+                    $"'{newContact.Website}', '{newContact.Notes}', '{newContactImagePath}', '{favString}', '1')");
             }
             Contact.contactsList.Add(newContact);
             CC.Content = new HomeScreen();
@@ -141,7 +141,7 @@ namespace ContactsAttempt {
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
             Contact newContact = CreateContact();
             AddContactToDatabase(newContact);
-            //CC.Content = new MainWindow();
+            CC.Content = new HomeScreen();
 
         }
 

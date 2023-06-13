@@ -46,7 +46,7 @@
         <Label Content="Website          :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,396,500,370"/>
         <Label Content="Notes             :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,475,500,291"/>
 
-        <RadioButton Name="btnFavorite" Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
+        <CheckBox Name="btnFavorite" Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
         <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Click="UploadBtn_Click"/>
         <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen" Click="ConfirmBtn_Click"/>
         <Button Content="Cancel"  FontSize="26" FontFamily="Bahnschrift Light" Margin="980,678,108,52" Background="Red" Click="CancelBtn_Click"/>

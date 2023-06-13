@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,21 +34,22 @@ namespace ContactsAttempt {
         #region Buttons
 
         private void btnAdd_Click(object sender, RoutedEventArgs e) {
-
-            if (Window.GetWindow(this) is MainWindow mainWindow) {
-                ShowAddScreen();
-            }
+            CC.Content = new AddContact();
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e) {
-
-            if (Window.GetWindow(this) is MainWindow mainWindow) {
-                ShowEditScreen();
-            }
+            CC.Content = new EditContact();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show($"Are you sure you want to delete {Contact.currentContact.ToString()}?");
 
+            //Contact.currentContact.IsActive = false;
+            //
+            //var connection = new SqlConnection(connectionString);
+            //using (connection) {
+            //    connection.Query<Contact>($"UPDATE tblContact SET isActive = '0' WHERE id = '{Contact.currentContact.Id}'");
+            //}
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
@@ -61,14 +64,6 @@ namespace ContactsAttempt {
 
         #region XAML controls
 
-        private void ShowAddScreen() {
-            CC.Content = new AddContact();
-        }
-
-        private void ShowEditScreen() {
-            CC.Content = new EditContact();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e) {
 
         }
@@ -79,7 +74,7 @@ namespace ContactsAttempt {
             for (int i = 0; i < Contact.contactsList.Count; i++) {
                 if (Contact.contactsList[i].IsActive) {
                     Contact.activeContactsList.Add(Contact.contactsList[i]);
-                } 
+                }
             }
             return Contact.activeContactsList;
         }
@@ -87,9 +82,11 @@ namespace ContactsAttempt {
         private void ListContacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             // When listbox item is clicked
             var selectedItem = (ListBox)sender;
-            Contact.currentContact = (Contact)selectedItem.SelectedItem;
+            var clickedItem = (Contact)selectedItem.SelectedItem;
 
+            Contact.currentContact = clickedItem;
             UpdateContactScreen(Contact.currentContact);
+
         }// End function
 
         private void UpdateContactScreen(Contact currentContact) {
@@ -98,6 +95,7 @@ namespace ContactsAttempt {
             } else {
                 NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
             }
+            IdId.Content = currentContact.Id;
             StreetId.Content = currentContact.Street;
             CityId.Content = currentContact.City;
             StateId.Content = currentContact.State;
