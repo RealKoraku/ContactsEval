@@ -51,23 +51,66 @@ namespace ContactsAttempt {
             EditWebsite.Text = selectedContact.Website;
             EditNotes.Text = selectedContact.Notes;
 
+            BuildBirthDate(selectedContact);
+
+            //string birthDate = selectedContact.BirthDate;
+            //
+            //string month = "";
+            //string day = "";
+            //string year = "";
+            //
+            //for (int i = 0; i < birthDate.Length; i++) {
+            //    if (i < 2) {
+            //        month += birthDate[i];
+            //    }
+            //    if (i > 2 && i < 5) {
+            //        day += birthDate[i];
+            //    }
+            //    if (i > 5 && i < 10) {
+            //        year += birthDate[i];
+            //    }
+            //}
+            //EditMonth.Text = month;
+            //EditDay.Text = day;
+            //EditYear.Text = year;
+        }
+
+        private void BuildBirthDate(Contact selectedContact) {
             string birthDate = selectedContact.BirthDate;
 
             string month = "";
             string day = "";
             string year = "";
 
-            for (int i = 0; i < birthDate.Length; i++) {
-                if (i < 2) {
-                    month += birthDate[i];
+            string dateSub = birthDate.Substring(0, 4);
+
+            if (dateSub.Contains('-') || dateSub.Contains('/')) {
+
+                for (int i = 0; i < birthDate.Length; i++) {
+                    if (i < 2) {
+                        month += birthDate[i];
+                    }
+                    if (i > 2 && i < 5) {
+                        day += birthDate[i];
+                    }
+                    if (i > 5 && i < 10) {
+                        year += birthDate[i];
+                    }
                 }
-                if (i > 2 && i < 5) {
-                    day += birthDate[i];
-                }
-                if (i > 5 && i < 10) {
-                    year += birthDate[i];
+            } else {
+                for (int i = 0; i < birthDate.Length; i++) {
+                    if (i < 4) {
+                        year += birthDate[i];
+                    }
+                    if (i > 4 && i < 7) {
+                        month += birthDate[i];
+                    }
+                    if (i > 7 && i < 10) {
+                        day += birthDate[i];
+                    }
                 }
             }
+
             EditMonth.Text = month;
             EditDay.Text = day;
             EditYear.Text = year;

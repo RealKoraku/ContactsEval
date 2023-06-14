@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Window;
 
 namespace ContactsAttempt {
     /// <summary>
@@ -25,7 +26,9 @@ namespace ContactsAttempt {
 
         public HomeScreen() {
             InitializeComponent();
+
             Contact.activeContactsList = CheckActiveContacts();
+            Contact.inactiveContactsList = CheckInactiveContacts();
             Contact.currentContact = Contact.activeContactsList[1];
             UpdateContactScreen(Contact.currentContact);
             ContactsListBox.ItemsSource = Contact.activeContactsList;
@@ -42,18 +45,27 @@ namespace ContactsAttempt {
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show($"Are you sure you want to delete {Contact.currentContact.ToString()}?");
 
-            //Contact.currentContact.IsActive = false;
-            //
-            //var connection = new SqlConnection(connectionString);
-            //using (connection) {
-            //    connection.Query<Contact>($"UPDATE tblContact SET isActive = '0' WHERE id = '{Contact.currentContact.Id}'");
-            //}
+            var dialogResult = (MessageBox.Show($"Are you sure you want to delete {Contact.currentContact.ToString()}?", "Delete Contact", MessageBoxButton.YesNo));
+            if (dialogResult == MessageBoxResult.Yes) {
+                Contact.currentContact.IsActive = false;
+
+                var connection = new SqlConnection(connectionString);
+                using (connection) {
+                    connection.Query<Contact>($"UPDATE tblContact SET isActive = '0' WHERE id = '{Contact.currentContact.Id}'");
+                }
+
+                Contact.activeContactsList = CheckActiveContacts();
+                Contact.inactiveContactsList = CheckInactiveContacts();
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
+
+            } else {
+                Contact.currentContact.IsActive = true;
+            }
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
-            string searchTerm = SearchId.Text;
+            string searchTerm = SearchId.Text;      
         }
 
         private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
@@ -79,6 +91,17 @@ namespace ContactsAttempt {
             return Contact.activeContactsList;
         }
 
+        private List<Contact> CheckInactiveContacts() {
+            Contact.inactiveContactsList = new List<Contact>();
+
+            for (int i = 0; i < Contact.contactsList.Count; i++) {
+                if (Contact.contactsList[i].IsActive == false) {
+                    Contact.inactiveContactsList.Add(Contact.contactsList[i]);
+                }
+            }
+            return Contact.activeContactsList;
+        }
+
         private void ListContacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             // When listbox item is clicked
             var selectedItem = (ListBox)sender;
@@ -90,6 +113,10 @@ namespace ContactsAttempt {
         }// End function
 
         private void UpdateContactScreen(Contact currentContact) {
+            if (currentContact == null) {
+                currentContact = Contact.activeContactsList[0];
+                Contact.currentContact = currentContact;
+            }
             if (currentContact.Nickname != null && currentContact.Nickname != "") {
                 NameId.Content = currentContact.Nickname + " " + $"({currentContact.FirstName})" + " " + currentContact.MiddleName + " " + currentContact.LastName;
             } else {

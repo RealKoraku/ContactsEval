@@ -16,6 +16,7 @@ namespace ContactsAttempt {
         public static Contact currentContact { get; set; }
         public static List<Contact> contactsList { get; set; }
         public static List<Contact> activeContactsList { get; set; }
+        public static List<Contact> inactiveContactsList { get; set; }
 
         public int Id { get; set; }
         public string FirstName { get; set; }
