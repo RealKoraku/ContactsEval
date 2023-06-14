@@ -14,9 +14,9 @@
         <TextBox Name="EditLastName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,228,688,502"/>
         <TextBox Name="EditNickname" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,303,688,427"/>
         <TextBox Name="EditTitle" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
-        <TextBox Name="EditMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="257,453,955,277"/>
-        <TextBox Name="EditDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="372,453,840,277"/>
-        <TextBox Name="EditYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="503,453,688,277"/>
+        <TextBox Name="EditMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="257,453,955,277" MaxLength="2"/>
+        <TextBox Name="EditDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="372,453,840,277"   MaxLength="2"/>
+        <TextBox Name="EditYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="503,453,688,277"  MaxLength="4"/>
         <TextBox Name="EditEmail" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,528,688,202"/>
         <TextBox Name="EditPhone" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,603,688,127"/>
         <TextBox Name="EditStreet" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,678,688,52"/>
@@ -34,7 +34,7 @@
         <Label Content="Title                 :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,396,1080,370"/>
         <Label Content="Birthdate         :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,471,1080,295"/>
         <Label Content="MM:" FontSize="22" FontFamily="Bahnschrift Light" Margin="205,475,1007,291"/>
-        <Label Content="DD:" FontSize="22" FontFamily="Bahnschrift Light" Margin="330,475,882,291"/>
+        <Label Content="DD:" FontSize="22" FontFamily="Bahnschrift Light" Margin="330,475,882,291" />
         <Label Content="YYYY:" FontSize="22" FontFamily="Bahnschrift Light" Margin="443,475,769,291"/>
         <Label Content="Email               :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,546,1080,220"/>
         <Label Content="Phone              :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,621,1080,145"/>

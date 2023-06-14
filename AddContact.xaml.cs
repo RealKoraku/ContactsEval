@@ -139,10 +139,13 @@ namespace ContactsAttempt {
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
-            Contact newContact = CreateContact();
-            AddContactToDatabase(newContact);
-            CC.Content = new HomeScreen();
-
+            if (NewMonth.Text.Length != 2 || NewDay.Text.Length != 2 || NewYear.Text.Length != 4) {
+                MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
+            } else {
+                Contact newContact = CreateContact();
+                AddContactToDatabase(newContact);
+                CC.Content = new HomeScreen();
+            }
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e) {

@@ -14,9 +14,9 @@
         <TextBox Name="NewLastName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,228,688,502"/>
         <TextBox Name="NewNickname" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,303,688,427"/>
         <TextBox Name="NewTitle" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
-        <TextBox Name="NewMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="257,453,955,277"/>
-        <TextBox Name="NewDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="372,453,840,277"/>
-        <TextBox Name="NewYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="503,453,688,277"/>
+        <TextBox Name="NewMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="257,453,955,277" MaxLength="2"/>
+        <TextBox Name="NewDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="372,453,840,277"   MaxLength="2"/>
+        <TextBox Name="NewYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="503,453,688,277"  MaxLength="4"/>
         <TextBox Name="NewEmail" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,528,688,202"/>
         <TextBox Name="NewPhone" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,603,688,127"/>
         <TextBox Name="NewStreet" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,678,688,52"/>

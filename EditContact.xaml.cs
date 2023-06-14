@@ -52,27 +52,6 @@ namespace ContactsAttempt {
             EditNotes.Text = selectedContact.Notes;
 
             BuildBirthDate(selectedContact);
-
-            //string birthDate = selectedContact.BirthDate;
-            //
-            //string month = "";
-            //string day = "";
-            //string year = "";
-            //
-            //for (int i = 0; i < birthDate.Length; i++) {
-            //    if (i < 2) {
-            //        month += birthDate[i];
-            //    }
-            //    if (i > 2 && i < 5) {
-            //        day += birthDate[i];
-            //    }
-            //    if (i > 5 && i < 10) {
-            //        year += birthDate[i];
-            //    }
-            //}
-            //EditMonth.Text = month;
-            //EditDay.Text = day;
-            //EditYear.Text = year;
         }
 
         private void BuildBirthDate(Contact selectedContact) {
@@ -183,8 +162,13 @@ namespace ContactsAttempt {
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
-            Contact.currentContact = UpdateContact(Contact.currentContact);
-            CC.Content = new HomeScreen();
+
+            if (EditMonth.Text.Length != 2 || EditDay.Text.Length != 2 || EditYear.Text.Length != 4) {
+                MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
+            } else {
+                Contact.currentContact = UpdateContact(Contact.currentContact);
+                CC.Content = new HomeScreen();
+            }
         }
 
         private void CancelBtn_Click(object sender, RoutedEventArgs e) {
