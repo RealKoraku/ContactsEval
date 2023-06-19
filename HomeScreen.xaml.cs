@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Windows.Window;
 
 namespace ContactsAttempt {
     /// <summary>
@@ -58,9 +57,6 @@ namespace ContactsAttempt {
                 Contact.activeContactsList = CheckActiveContacts();
                 Contact.inactiveContactsList = CheckInactiveContacts();
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
-
-            } else {
-                Contact.currentContact.IsActive = true;
             }
         }
 
@@ -68,8 +64,21 @@ namespace ContactsAttempt {
             string searchTerm = SearchId.Text;      
         }
 
-        private void OptionsBtn_Click(object sender, RoutedEventArgs e) {
+        private void SortAZBtn_Click(object sender, RoutedEventArgs e) {
+            Contact.activeContactsList = SortContactsAZ();
+            ContactsListBox.ItemsSource = Contact.activeContactsList;
+        }
 
+        private void SortZABtn_Click(object sender, RoutedEventArgs e) {
+            Contact.activeContactsList = SortContactsZA();
+            ContactsListBox.ItemsSource = Contact.activeContactsList;
+        }
+
+        private void EmptyBtn_Click(object sender, RoutedEventArgs e) {
+            var dialogResult = (MessageBox.Show($"Are you sure you want to delete all inactive/removed contacts?", "Empty inactive contacts", MessageBoxButton.YesNo));
+            if (dialogResult == MessageBoxResult.Yes) {
+                Contact.inactiveContactsList = EmptyInactiveContacts();
+            }
         }
 
         #endregion
@@ -99,7 +108,35 @@ namespace ContactsAttempt {
                     Contact.inactiveContactsList.Add(Contact.contactsList[i]);
                 }
             }
-            return Contact.activeContactsList;
+            return Contact.inactiveContactsList;
+        }
+
+        private List<Contact> SortContactsAZ() {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                return connection.Query<Contact>($"SELECT * FROM tblContact ORDER BY firstName ASC").ToList();
+            }
+
+        }
+
+        private List<Contact> SortContactsZA() {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                return connection.Query<Contact>($"SELECT * FROM tblContact ORDER BY firstName DESC").ToList();
+            }
+
+        }
+
+        private List<Contact> EmptyInactiveContacts() {
+            Contact.inactiveContactsList = CheckInactiveContacts();
+            Contact.inactiveContactsList.Clear();
+
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                connection.Query<Contact>($"DELETE FROM tblContact WHERE isActive = '0'");
+            }
+
+            return Contact.inactiveContactsList;
         }
 
         private void ListContacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -122,7 +159,7 @@ namespace ContactsAttempt {
             } else {
                 NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
             }
-            IdId.Content = currentContact.Id;
+
             StreetId.Content = currentContact.Street;
             CityId.Content = currentContact.City;
             StateId.Content = currentContact.State;

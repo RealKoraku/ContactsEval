@@ -24,6 +24,7 @@ namespace ContactsAttempt {
 
         static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
         static string newContactImagePath = "";
+
         public AddContact() {
             InitializeComponent();
         }

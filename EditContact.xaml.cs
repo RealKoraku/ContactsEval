@@ -18,6 +18,7 @@ using System.Data.SqlClient;
 using System.Diagnostics.Metrics;
 using System.IO;
 using System.Reflection.Emit;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ContactsAttempt {
     /// <summary>
@@ -26,11 +27,12 @@ namespace ContactsAttempt {
     public partial class EditContact : UserControl {
 
         static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
-        static string ContactImagePath = "";
+        static string ContactImagePath;
         static string firstName = Contact.currentContact.FirstName;
         static string lastName = Contact.currentContact.LastName;
 
         public EditContact() {
+            ContactImagePath = Contact.currentContact.Picture;
             InitializeComponent();
             PopulateEditBoxes(Contact.currentContact);
         }
@@ -51,7 +53,15 @@ namespace ContactsAttempt {
             EditWebsite.Text = selectedContact.Website;
             EditNotes.Text = selectedContact.Notes;
 
+            if (selectedContact.IsFavorite) {
+                btnFavorite.IsChecked = true;
+            }
+
             BuildBirthDate(selectedContact);
+
+            if (EditYear.Text == "null") {
+                EditYear.Text = "";
+            }
         }
 
         private void BuildBirthDate(Contact selectedContact) {
@@ -61,31 +71,33 @@ namespace ContactsAttempt {
             string day = "";
             string year = "";
 
-            string dateSub = birthDate.Substring(0, 4);
+            if (birthDate != null) {
+                string dateSub = birthDate.Substring(0, 4);
 
-            if (dateSub.Contains('-') || dateSub.Contains('/')) {
+                if (dateSub.Contains('-') || dateSub.Contains('/')) {
 
-                for (int i = 0; i < birthDate.Length; i++) {
-                    if (i < 2) {
-                        month += birthDate[i];
+                    for (int i = 0; i < birthDate.Length; i++) {
+                        if (i < 2) {
+                            month += birthDate[i];
+                        }
+                        if (i > 2 && i < 5) {
+                            day += birthDate[i];
+                        }
+                        if (i > 5 && i < 10) {
+                            year += birthDate[i];
+                        }
                     }
-                    if (i > 2 && i < 5) {
-                        day += birthDate[i];
-                    }
-                    if (i > 5 && i < 10) {
-                        year += birthDate[i];
-                    }
-                }
-            } else {
-                for (int i = 0; i < birthDate.Length; i++) {
-                    if (i < 4) {
-                        year += birthDate[i];
-                    }
-                    if (i > 4 && i < 7) {
-                        month += birthDate[i];
-                    }
-                    if (i > 7 && i < 10) {
-                        day += birthDate[i];
+                } else {
+                    for (int i = 0; i < birthDate.Length; i++) {
+                        if (i < 4) {
+                            year += birthDate[i];
+                        }
+                        if (i > 4 && i < 7) {
+                            month += birthDate[i];
+                        }
+                        if (i > 7 && i < 10) {
+                            day += birthDate[i];
+                        }
                     }
                 }
             }
@@ -97,7 +109,13 @@ namespace ContactsAttempt {
 
         private Contact UpdateContact(Contact selectedContact) {
 
-            string birthDateString = $"{EditYear.Text}-{EditMonth.Text}-{EditDay.Text}";
+            string birthDateString = "null";
+            if (EditYear.Text == "0000") {
+                birthDateString = "null";
+            } else {
+                birthDateString = $"'{EditYear.Text}-{EditMonth.Text}-{EditDay.Text}'";
+            }
+
             string favString;
 
             selectedContact.FirstName = EditFirstName.Text;
@@ -135,12 +153,12 @@ namespace ContactsAttempt {
             using (connection) {
                 connection.Query<Contact>($"UPDATE tblContact " +
                     $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
-                    $"birthDate = '{birthDateString}', " +
+                    $"birthDate = {birthDateString}, " +
                     $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +
                     $"website = '{selectedContact.Website}', notes = '{selectedContact.Notes}', picture = '{ContactImagePath}', isFavorite = '{favString}', isActive = '1'" +
                     $"WHERE id = '{selectedContact.Id}'");
             }
-            
+            ContactImagePath = null;
             return selectedContact;
         }
 
@@ -163,9 +181,15 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
 
-            if (EditMonth.Text.Length != 2 || EditDay.Text.Length != 2 || EditYear.Text.Length != 4) {
+            if (EditYear.Text.Length == 0 && EditMonth.Text.Length == 0 && EditDay.Text.Length == 0) {
+                EditYear.Text = "0000";
+                EditMonth.Text = "00";
+                EditDay.Text = "00";
+                Contact.currentContact = UpdateContact(Contact.currentContact);
+                CC.Content = new HomeScreen();
+            } else if (EditMonth.Text.Length != 2 || EditDay.Text.Length != 2 || EditYear.Text.Length != 4) {
                 MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
-            } else {
+            } else { 
                 Contact.currentContact = UpdateContact(Contact.currentContact);
                 CC.Content = new HomeScreen();
             }
