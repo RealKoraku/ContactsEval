@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,9 +29,14 @@ namespace ContactsAttempt {
 
             Contact.activeContactsList = CheckActiveContacts();
             Contact.inactiveContactsList = CheckInactiveContacts();
-            Contact.currentContact = Contact.activeContactsList[1];
-            UpdateContactScreen(Contact.currentContact);
             ContactsListBox.ItemsSource = Contact.activeContactsList;
+            ButtonsCheck();
+
+            if (Contact.activeContactsList.Count != 0) {
+                Contact.currentContact = Contact.activeContactsList[0];
+                Contact.currentContact = ReadSavedContact();
+                UpdateContactScreen(Contact.currentContact);
+            }
         }
 
         #region Buttons
@@ -49,28 +55,30 @@ namespace ContactsAttempt {
             if (dialogResult == MessageBoxResult.Yes) {
                 Contact.currentContact.IsActive = false;
 
-                var connection = new SqlConnection(connectionString);
-                using (connection) {
-                    connection.Query<Contact>($"UPDATE tblContact SET isActive = '0' WHERE id = '{Contact.currentContact.Id}'");
-                }
+                SqlQuery($"UPDATE tblContact SET isActive = '0' WHERE id = '{Contact.currentContact.Id}'");
 
                 Contact.activeContactsList = CheckActiveContacts();
                 Contact.inactiveContactsList = CheckInactiveContacts();
+
+                if (Contact.inactiveContactsList.Count >= 1) {
+                    EmptyBtn.Visibility = Visibility.Visible;
+                }
+
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
             }
         }
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
-            string searchTerm = SearchId.Text;      
+            string searchTerm = SearchId.Text;
         }
 
         private void SortAZBtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SortContactsAZ();
+            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact ORDER BY firstName ASC");
             ContactsListBox.ItemsSource = Contact.activeContactsList;
         }
 
         private void SortZABtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SortContactsZA();
+            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact ORDER BY firstName DESC");
             ContactsListBox.ItemsSource = Contact.activeContactsList;
         }
 
@@ -84,10 +92,6 @@ namespace ContactsAttempt {
         #endregion
 
         #region XAML controls
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
-        }
 
         private List<Contact> CheckActiveContacts() {
             Contact.activeContactsList = new List<Contact>();
@@ -111,30 +115,13 @@ namespace ContactsAttempt {
             return Contact.inactiveContactsList;
         }
 
-        private List<Contact> SortContactsAZ() {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                return connection.Query<Contact>($"SELECT * FROM tblContact ORDER BY firstName ASC").ToList();
-            }
-
-        }
-
-        private List<Contact> SortContactsZA() {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                return connection.Query<Contact>($"SELECT * FROM tblContact ORDER BY firstName DESC").ToList();
-            }
-
-        }
-
         private List<Contact> EmptyInactiveContacts() {
             Contact.inactiveContactsList = CheckInactiveContacts();
             Contact.inactiveContactsList.Clear();
 
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                connection.Query<Contact>($"DELETE FROM tblContact WHERE isActive = '0'");
-            }
+            SqlQuery("DELETE FROM tblContact WHERE isActive = '0'");
+
+            EmptyBtn.Visibility = Visibility.Hidden;
 
             return Contact.inactiveContactsList;
         }
@@ -145,6 +132,11 @@ namespace ContactsAttempt {
             var clickedItem = (Contact)selectedItem.SelectedItem;
 
             Contact.currentContact = clickedItem;
+
+            if (Contact.currentContact != null) {
+                SaveContact(Contact.currentContact);
+            }
+
             UpdateContactScreen(Contact.currentContact);
 
         }// End function
@@ -174,6 +166,19 @@ namespace ContactsAttempt {
             }
         }
 
+        private void ButtonsCheck() {
+            if (Contact.activeContactsList.Count == 0) {
+                btnEdit.Visibility = Visibility.Hidden;
+                btnDelete.Visibility = Visibility.Hidden;
+                SortAzBtn.Visibility = Visibility.Hidden;
+                SortZaBtn.Visibility = Visibility.Hidden;
+            }
+
+            if (Contact.inactiveContactsList.Count == 0) {
+                EmptyBtn.Visibility = Visibility.Hidden;
+            }
+        }
+
         private void LoadImage(string path) {
             //CREATE BITMAP TO HOLD IMAGE DATA
             BitmapImage bmpImage = new BitmapImage();
@@ -188,6 +193,53 @@ namespace ContactsAttempt {
 
             //SET IMAGE CONTROL TO DISPLAY THE IMAGE
             ImageId.Source = bmpImage;
+        }
+
+        private void SqlQuery(string query) {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                connection.Query<Contact>($"{query}");
+            }
+        }
+
+        private List<Contact> SqlQueryList(string query) {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                return connection.Query<Contact>($"{query}").ToList();
+            }
+        }
+
+        #endregion
+
+        #region FileIO
+
+        private Contact ReadSavedContact() {
+            string path = "C:\\Users\\MCA Coder\\Desktop\\savedContact.txt";
+            string saveContactId = $"{Contact.currentContact.Id}";
+
+            if (File.Exists(path)) {
+                string contactId = File.ReadAllText(path);
+
+                List<Contact> saved = SqlQueryList($"SELECT * FROM tblContact WHERE id = '{contactId}'");
+                Contact.currentContact = saved[0];
+
+                return Contact.currentContact;
+        
+            } else {
+                try {
+                    File.WriteAllText(path, Contact.currentContact.Id.ToString());
+                    return Contact.currentContact;
+                } catch (Exception error) { }
+                return Contact.currentContact;
+            }
+        }
+
+        private void SaveContact(Contact currentContact) {
+            string path = "C:\\Users\\MCA Coder\\Desktop\\savedContact.txt";
+
+            try {
+                File.WriteAllText(path, currentContact.Id.ToString());
+            } catch (Exception error) { }
         }
 
         #endregion

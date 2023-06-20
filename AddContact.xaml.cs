@@ -49,11 +49,13 @@ namespace ContactsAttempt {
             if (NewTitle.Text != null) {
                 newContact.Title = NewTitle.Text;
             }
-            if (NewDay.Text != null && NewMonth.Text != null && NewYear.Text != null) {
+            if (NewDay.Text != "00" && NewMonth.Text != "00" && NewYear.Text != "0000") {
 
-                string birthDateString = $"{NewYear.Text}-{NewMonth.Text}-{NewDay.Text}";
-
+                string birthDateString = $"'{NewYear.Text}-{NewMonth.Text}-{NewDay.Text}'";
                 newContact.BirthDate = birthDateString;
+            } else {
+                string birthDateString = "null";
+                newContact.BirthDate = "null";
             }
 
             if (NewEmail.Text != null) {
@@ -115,7 +117,7 @@ namespace ContactsAttempt {
             using (connection) {
                 connection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, picture, isFavorite, isActive) " +
                     $"VALUES ('{newContact.FirstName}', '{newContact.MiddleName}', '{newContact.LastName}', '{newContact.Nickname}', '{newContact.Title}', " +
-                    $"'{newContact.BirthDate}', '{newContact.Email}', '{newContact.Phone}', '{newContact.Street}', '{newContact.City}', '{newContact.State}', '{newContact.ZipCode}', '{newContact.Country}', " +
+                    $"{newContact.BirthDate}, '{newContact.Email}', '{newContact.Phone}', '{newContact.Street}', '{newContact.City}', '{newContact.State}', '{newContact.ZipCode}', '{newContact.Country}', " +
                     $"'{newContact.Website}', '{newContact.Notes}', '{newContactImagePath}', '{favString}', '1')");
             }
             Contact.contactsList.Add(newContact);
@@ -140,7 +142,16 @@ namespace ContactsAttempt {
         }
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
-            if (NewMonth.Text.Length != 2 || NewDay.Text.Length != 2 || NewYear.Text.Length != 4) {
+
+            if (NewYear.Text.Length == 0 && NewMonth.Text.Length == 0 && NewDay.Text.Length == 0) {
+                NewYear.Text = "0000";
+                NewMonth.Text = "00";
+                NewDay.Text = "00";
+
+                Contact newContact = CreateContact();
+                AddContactToDatabase(newContact);
+                CC.Content = new HomeScreen();
+            } else if (NewMonth.Text.Length != 2 || NewDay.Text.Length != 2 || NewYear.Text.Length != 4) {
                 MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
             } else {
                 Contact newContact = CreateContact();
