@@ -35,6 +35,9 @@ namespace ContactsAttempt {
             if (Contact.activeContactsList.Count != 0) {
                 Contact.currentContact = Contact.activeContactsList[0];
                 Contact.currentContact = ReadSavedContact();
+                if (Contact.currentContact.IsActive == false) {
+                    Contact.currentContact = Contact.activeContactsList[0];
+                }
                 UpdateContactScreen(Contact.currentContact);
             }
         }
@@ -70,6 +73,14 @@ namespace ContactsAttempt {
 
         private void SearchBtn_Click(object sender, RoutedEventArgs e) {
             string searchTerm = SearchId.Text;
+
+            List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE firstName LIKE '%{searchTerm}%'");
+
+            if (contactSearch.Count == 0 ) {
+                contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE lastName LIKE '%{searchTerm}%'");
+            }
+
+            ContactsListBox.ItemsSource = contactSearch;
         }
 
         private void SortAZBtn_Click(object sender, RoutedEventArgs e) {
@@ -141,6 +152,15 @@ namespace ContactsAttempt {
 
         }// End function
 
+        private void SearchId_TextChanged(object sender, EventArgs e) {
+            if (SearchId.Text == "") {
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
+            } else {
+                List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE firstName LIKE '%{SearchId.Text}%' OR lastName LIKE '%{SearchId.Text}%'");
+                ContactsListBox.ItemsSource = contactSearch;
+            }
+        }
+
         private void UpdateContactScreen(Contact currentContact) {
             if (currentContact == null) {
                 currentContact = Contact.activeContactsList[0];
@@ -163,6 +183,8 @@ namespace ContactsAttempt {
 
             if (currentContact.Picture != null && currentContact.Picture != "") {
                 LoadImage(currentContact.Picture);
+            } else {
+                ImageId.Source = null;
             }
         }
 
@@ -221,8 +243,10 @@ namespace ContactsAttempt {
                 string contactId = File.ReadAllText(path);
 
                 List<Contact> saved = SqlQueryList($"SELECT * FROM tblContact WHERE id = '{contactId}'");
-                Contact.currentContact = saved[0];
-
+                if (saved.Count > 0) {
+                    Contact.currentContact = saved[0];
+                    return Contact.currentContact;
+                }
                 return Contact.currentContact;
         
             } else {
