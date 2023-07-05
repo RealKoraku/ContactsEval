@@ -27,6 +27,7 @@ namespace ContactsAttempt {
         public HomeScreen() {
             InitializeComponent();
 
+            Contact.contactsList = SQLCheck();
             Contact.activeContactsList = CheckActiveContacts();
             Contact.inactiveContactsList = CheckInactiveContacts();
             ContactsListBox.ItemsSource = Contact.activeContactsList;
@@ -127,14 +128,20 @@ namespace ContactsAttempt {
         }
 
         private List<Contact> EmptyInactiveContacts() {
-            Contact.inactiveContactsList = CheckInactiveContacts();
-            Contact.inactiveContactsList.Clear();
 
             SqlQuery("DELETE FROM tblContact WHERE isActive = '0'");
 
             EmptyBtn.Visibility = Visibility.Hidden;
 
+            Contact.inactiveContactsList.Clear();
             return Contact.inactiveContactsList;
+        }
+
+        private List<Contact> SQLCheck() {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                return connection.Query<Contact>("SELECT * FROM tblContact").ToList();
+            }
         }
 
         private void ListContacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {

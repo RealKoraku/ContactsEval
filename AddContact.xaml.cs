@@ -143,6 +143,11 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
 
+            if (NewFirstName.Text == "" && NewNickname.Text == "") {
+                MessageBox.Show("Contact requires first name or nickname");
+                return;
+            }
+
             if (NewYear.Text.Length == 0 && NewMonth.Text.Length == 0 && NewDay.Text.Length == 0) {
                 NewYear.Text = "0000";
                 NewMonth.Text = "00";
