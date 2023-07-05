@@ -181,16 +181,20 @@ namespace ContactsAttempt {
 
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
 
+            if (EditFirstName.Text == "" && EditNickname.Text == "") {
+                MessageBox.Show("Contact requires first name or nickname");
+                return;
+            }
+
             if (EditYear.Text.Length == 0 && EditMonth.Text.Length == 0 && EditDay.Text.Length == 0) {
                 EditYear.Text = "0000";
                 EditMonth.Text = "00";
                 EditDay.Text = "00";
                 Contact.currentContact = UpdateContact(Contact.currentContact);
                 CC.Content = new HomeScreen();
+                
             } else if (EditMonth.Text.Length != 2 || EditDay.Text.Length != 2 || EditYear.Text.Length != 4) {
                 MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
-            } else if (EditFirstName.Text == null && EditNickname.Text == null) {
-                MessageBox.Show("Contact requires first name or nickname");
             } else { 
                 Contact.currentContact = UpdateContact(Contact.currentContact);
                 CC.Content = new HomeScreen();

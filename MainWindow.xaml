@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactsAttempt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280" Background="AntiqueWhite" Loaded="Window_Loaded">
+        Title="MainWindow" Height="840" Width="1300" Background="AntiqueWhite" Loaded="Window_Loaded">
     <Grid>
         <Label Content="Enter database name:" Margin="300,240,320,461" FontSize="26" FontFamily="Bahnschrift"/>
-        <TextBox Name="DatabaseBox" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift" Margin="300,289,199,427"/>
+        <TextBox Name="DatabaseBox" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift" Margin="300,289,219,469"/>
         <Label Name="FailedLbl" Content="Connection Failed"  Margin="300,360,320,350" FontSize="26" FontFamily="Bahnschrift" Opacity="0" Foreground="DarkRed"/>
 
-        <ContentControl x:Name="CC" Grid.Column="0" Height="784" VerticalAlignment="Center" />
-        <Button Name="EnterBtn" Content="Enter" Margin="1086,289,75,427" Background="LightGreen" Click="EnterBtn_Click"/>
+        <ContentControl x:Name="CC" Grid.Column="0" />
+        <Button Name="EnterBtn" Content="Enter" Margin="1086,289,75,469" Background="LightGreen" Click="EnterBtn_Click"/>
 
     </Grid>
 </Window>
