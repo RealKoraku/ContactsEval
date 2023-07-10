@@ -168,6 +168,41 @@ namespace ContactsAttempt {
             }
         }
 
+        private void TxtBdayRange_TextChanged(object sender, EventArgs e) {
+
+            bool parser = int.TryParse(TxtBdayRange.Text, out int range);
+
+            if (parser) {
+
+                if (range > 365) {
+                    range = 365;
+                }
+
+                DateTime todaysDate = DateTime.Now;
+                List<Contact> bdayList = new List<Contact>();
+
+                for (int i = 0; i < range; i++) {
+
+                    DateTime currentDate = todaysDate.AddDays(i);
+                    DateTime inverseDate = todaysDate.AddDays(-i);
+
+                    for (int contact = 0; contact < Contact.contactsList.Count; contact++) {
+                        if (Contact.contactsList[contact].BirthDate != null) {
+                            DateTime birthDate = DateTime.Parse(Contact.contactsList[contact].BirthDate);
+                            if (birthDate.Month == currentDate.Month && birthDate.Day == currentDate.Day && Contact.contactsList[contact].IsActive == true && (bdayList.Contains(Contact.contactsList[contact]) == false)) {
+                                bdayList.Add(Contact.contactsList[contact]);
+                            } else if (birthDate.Month == inverseDate.Month && birthDate.Day == inverseDate.Day && Contact.contactsList[contact].IsActive == true && (bdayList.Contains(Contact.contactsList[contact]) == false)) {
+                                bdayList.Add(Contact.contactsList[contact]);
+                            }
+                        }
+                    }
+                }
+                ContactsListBox.ItemsSource = bdayList;
+            } else {
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
+            }
+        }
+
         private void UpdateContactScreen(Contact currentContact) {
             if (currentContact == null) {
                 currentContact = Contact.activeContactsList[0];

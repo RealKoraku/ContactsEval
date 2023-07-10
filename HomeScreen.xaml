@@ -31,6 +31,7 @@
         <Button Name="EmptyBtn" Content="Empty inactive/deleted contacts" Margin="165,10,1040,740" Width="75" Height="50" Click="EmptyBtn_Click"/>
         <Button Name="SortAzBtn" Content="Sort A-Z" Margin="5,10,1200,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortAZBtn_Click"/>
         <Button Name="SortZaBtn" Content="Sort Z-A" Margin="85,10,1120,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortZABtn_Click"/>
+        <TextBox Name="TxtBdayRange" TextWrapping="Wrap" Margin="240,35,960,740" MaxLength="3" TextChanged="TxtBdayRange_TextChanged"/>
 
         <ContentControl x:Name="CC" Grid.Column="0" />
 

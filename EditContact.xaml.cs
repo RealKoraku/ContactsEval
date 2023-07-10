@@ -144,6 +144,19 @@ namespace ContactsAttempt {
                 favString = "0";
             }
 
+            if (selectedContact.Notes.Contains("\'")) {
+
+                string newNotes = "";
+                for (int i = 0; i < EditNotes.Text.Length; i++) {
+                    if (selectedContact.Notes[i] == '\'') {
+                        newNotes += "";
+                    } else {
+                        newNotes += selectedContact.Notes[i];
+                    }
+                }
+                selectedContact.Notes = newNotes;
+            }
+
             if (ContactImagePath != null) {
                 selectedContact.Picture = ContactImagePath;
             }
@@ -151,7 +164,7 @@ namespace ContactsAttempt {
             var connection = new SqlConnection(connectionString);
 
             using (connection) {
-                connection.Query<Contact>($"UPDATE tblContact " +
+                 connection.Query<Contact>($"UPDATE tblContact " +
                     $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
                     $"birthDate = {birthDateString}, " +
                     $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +
