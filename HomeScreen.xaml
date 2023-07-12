@@ -8,7 +8,7 @@
              d:Height="800" d:Width="1280" Background="AntiqueWhite">
     <Grid>
         <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <ListBox Name="ContactsListBox" Height ="655" Margin="10,134,960,10" FontFamily="Bahnschrift Light" FontSize="16" SelectionChanged="ListContacts_SelectionChanged"/>
+        <ListBox Name="ContactsListBox" Margin="10,159,960,98" FontFamily="Bahnschrift Light" FontSize="16" SelectionChanged="ListContacts_SelectionChanged"/>
         <Image Name="ImageId" Height="300" Width="300" Margin="373,75,597,404"/>
         <Label Name="NameId"  Content="First Name" Margin="698,80,10,640" FontFamily="Bahnschrift Light" FontSize="18" />
         <Label Name="StreetId" Content="Street Address" Margin="698,134,10,585" FontFamily="Bahnschrift Light" FontSize="18"/>
@@ -28,9 +28,14 @@
         <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnDelete_Click"/>
         <Button Content="Edit Contact"   Name="btnEdit" Margin="683,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click"/>
         <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>
-        <Button Name="EmptyBtn" Content="Empty inactive/deleted contacts" Margin="165,10,1040,740" Width="75" Height="50" Click="EmptyBtn_Click"/>
+        <Button Name="EmptyBtn" Margin="165,10,1040,740" Width="75" Height="50" Click="EmptyBtn_Click">
+            <TextBlock Text="Empty inactive contacts" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
         <Button Name="SortAzBtn" Content="Sort A-Z" Margin="5,10,1200,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortAZBtn_Click"/>
         <Button Name="SortZaBtn" Content="Sort Z-A" Margin="85,10,1120,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortZABtn_Click"/>
+        <Button Name="ShowInactiveBtn" Margin="116,721,1053,24" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="ShowBtnTxt_Click">
+            <TextBlock Name="ShowBtnTxt" Text="Show inactive contacts" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
         <TextBox Name="TxtBdayRange" TextWrapping="Wrap" Margin="240,35,960,740" MaxLength="3" TextChanged="TxtBdayRange_TextChanged"/>
 
         <ContentControl x:Name="CC" Grid.Column="0" />

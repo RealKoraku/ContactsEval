@@ -72,25 +72,13 @@ namespace ContactsAttempt {
             }
         }
 
-        private void SearchBtn_Click(object sender, RoutedEventArgs e) {
-            string searchTerm = SearchId.Text;
-
-            List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE firstName LIKE '%{searchTerm}%'");
-
-            if (contactSearch.Count == 0 ) {
-                contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE lastName LIKE '%{searchTerm}%'");
-            }
-
-            ContactsListBox.ItemsSource = contactSearch;
-        }
-
         private void SortAZBtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact ORDER BY firstName ASC");
+            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName ASC");
             ContactsListBox.ItemsSource = Contact.activeContactsList;
         }
 
         private void SortZABtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact ORDER BY firstName DESC");
+            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName DESC");
             ContactsListBox.ItemsSource = Contact.activeContactsList;
         }
 
@@ -101,11 +89,25 @@ namespace ContactsAttempt {
             }
         }
 
-        #endregion
+        private void ShowBtnTxt_Click(object sender, RoutedEventArgs e) {
+            if (ShowBtnTxt.Text == "Show inactive contacts") {
+                Contact.inactiveContactsList = CheckInactiveContacts();
+                ContactsListBox.ItemsSource = Contact.inactiveContactsList;
 
-        #region XAML controls
+                ShowBtnTxt.Text = "Show active contacts";
+            } else {
+                Contact.activeContactsList = CheckActiveContacts();
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
 
-        private List<Contact> CheckActiveContacts() {
+                ShowBtnTxt.Text = "Show inactive contacts";
+            }
+        }
+
+            #endregion
+
+            #region XAML controls
+
+            private List<Contact> CheckActiveContacts() {
             Contact.activeContactsList = new List<Contact>();
 
             for (int i = 0; i < Contact.contactsList.Count; i++) {
@@ -131,9 +133,22 @@ namespace ContactsAttempt {
 
             SqlQuery("DELETE FROM tblContact WHERE isActive = '0'");
 
-            EmptyBtn.Visibility = Visibility.Hidden;
+            List<Contact> refreshList = new();
 
+            for (int i = 0; i < Contact.contactsList.Count; i++) {
+                if (Contact.contactsList[i].IsActive == true) {
+                    refreshList.Add(Contact.contactsList[i]);
+                }
+            }
+            Contact.contactsList = refreshList;
+
+            EmptyBtn.Visibility = Visibility.Hidden;
             Contact.inactiveContactsList.Clear();
+
+            if (ShowBtnTxt.Text == "Show active contacts") {
+                ContactsListBox.ItemsSource = CheckInactiveContacts().ToList();
+            }
+
             return Contact.inactiveContactsList;
         }
 
@@ -160,12 +175,14 @@ namespace ContactsAttempt {
         }// End function
 
         private void SearchId_TextChanged(object sender, EventArgs e) {
+
             if (SearchId.Text == "") {
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
             } else {
-                List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE firstName LIKE '%{SearchId.Text}%' OR lastName LIKE '%{SearchId.Text}%'");
+                List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' AND firstName LIKE '%{SearchId.Text}%' OR lastName LIKE '%{SearchId.Text}%'");
                 ContactsListBox.ItemsSource = contactSearch;
             }
+            ShowBtnTxt.Text = "Show inactive contacts";
         }
 
         private void TxtBdayRange_TextChanged(object sender, EventArgs e) {
@@ -186,13 +203,13 @@ namespace ContactsAttempt {
                     DateTime currentDate = todaysDate.AddDays(i);
                     DateTime inverseDate = todaysDate.AddDays(-i);
 
-                    for (int contact = 0; contact < Contact.contactsList.Count; contact++) {
-                        if (Contact.contactsList[contact].BirthDate != null) {
-                            DateTime birthDate = DateTime.Parse(Contact.contactsList[contact].BirthDate);
-                            if (birthDate.Month == currentDate.Month && birthDate.Day == currentDate.Day && Contact.contactsList[contact].IsActive == true && (bdayList.Contains(Contact.contactsList[contact]) == false)) {
-                                bdayList.Add(Contact.contactsList[contact]);
-                            } else if (birthDate.Month == inverseDate.Month && birthDate.Day == inverseDate.Day && Contact.contactsList[contact].IsActive == true && (bdayList.Contains(Contact.contactsList[contact]) == false)) {
-                                bdayList.Add(Contact.contactsList[contact]);
+                    for (int contact = 0; contact < Contact.activeContactsList.Count; contact++) {
+                        if (Contact.activeContactsList[contact].BirthDate != null) {
+                            DateTime birthDate = DateTime.Parse(Contact.activeContactsList[contact].BirthDate);
+                            if (birthDate.Month == currentDate.Month && birthDate.Day == currentDate.Day && (bdayList.Contains(Contact.activeContactsList[contact]) == false)) {
+                                bdayList.Add(Contact.activeContactsList[contact]);
+                            } else if (birthDate.Month == inverseDate.Month && birthDate.Day == inverseDate.Day && (bdayList.Contains(Contact.activeContactsList[contact]) == false)) {
+                                bdayList.Add(Contact.activeContactsList[contact]);
                             }
                         }
                     }
@@ -201,6 +218,7 @@ namespace ContactsAttempt {
             } else {
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
             }
+            ShowBtnTxt.Text = "Show inactive contacts";
         }
 
         private void UpdateContactScreen(Contact currentContact) {
