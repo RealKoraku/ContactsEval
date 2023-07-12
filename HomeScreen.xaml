@@ -36,6 +36,7 @@
         <Button Name="ShowInactiveBtn" Margin="116,721,1053,24" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="ShowBtnTxt_Click">
             <TextBlock Name="ShowBtnTxt" Text="Show inactive contacts" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
+        <Button Name="RestoreBtn" Content="Restore" Margin="232,721,973,24" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="RestoreBtn_Click"/>
         <TextBox Name="TxtBdayRange" TextWrapping="Wrap" Margin="240,35,960,740" MaxLength="3" TextChanged="TxtBdayRange_TextChanged"/>
 
         <ContentControl x:Name="CC" Grid.Column="0" />

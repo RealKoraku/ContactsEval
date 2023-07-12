@@ -31,14 +31,11 @@ namespace ContactsAttempt {
             Contact.activeContactsList = CheckActiveContacts();
             Contact.inactiveContactsList = CheckInactiveContacts();
             ContactsListBox.ItemsSource = Contact.activeContactsList;
-            ButtonsCheck();
 
             if (Contact.activeContactsList.Count != 0) {
                 Contact.currentContact = Contact.activeContactsList[0];
                 Contact.currentContact = ReadSavedContact();
-                if (Contact.currentContact.IsActive == false) {
-                    Contact.currentContact = Contact.activeContactsList[0];
-                }
+                ButtonsCheck();
                 UpdateContactScreen(Contact.currentContact);
             }
         }
@@ -103,6 +100,18 @@ namespace ContactsAttempt {
             }
         }
 
+        private void RestoreBtn_Click(object sender, RoutedEventArgs e) {
+            SqlQuery("UPDATE tblContact SET isActive ='1'");
+            Contact.currentContact.IsActive = true;
+            Contact.inactiveContactsList = CheckInactiveContacts();
+            Contact.activeContactsList = CheckActiveContacts();
+            ContactsListBox.ItemsSource = Contact.inactiveContactsList;
+
+            if (Contact.inactiveContactsList.Count == 0) {
+                EmptyBtn.Visibility = Visibility.Hidden;
+            }
+        }
+
             #endregion
 
             #region XAML controls
@@ -146,7 +155,8 @@ namespace ContactsAttempt {
             Contact.inactiveContactsList.Clear();
 
             if (ShowBtnTxt.Text == "Show active contacts") {
-                ContactsListBox.ItemsSource = CheckInactiveContacts().ToList();
+                ContactsListBox.ItemsSource = CheckActiveContacts().ToList();
+                ShowBtnTxt.Text = "Show inactive contacts";
             }
 
             return Contact.inactiveContactsList;
@@ -246,6 +256,14 @@ namespace ContactsAttempt {
             } else {
                 ImageId.Source = null;
             }
+
+            if (Contact.currentContact.IsActive == false) {
+                RestoreBtn.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Hidden;
+            } else {
+                RestoreBtn.Visibility = Visibility.Hidden;
+                btnDelete.Visibility = Visibility.Visible;
+            }
         }
 
         private void ButtonsCheck() {
@@ -258,6 +276,14 @@ namespace ContactsAttempt {
 
             if (Contact.inactiveContactsList.Count == 0) {
                 EmptyBtn.Visibility = Visibility.Hidden;
+            }
+
+            if (Contact.currentContact != null && Contact.currentContact.IsActive) {
+                RestoreBtn.Visibility = Visibility.Hidden;
+                btnDelete.Visibility = Visibility.Visible;
+            } else {
+                RestoreBtn.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Hidden;
             }
         }
 
