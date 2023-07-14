@@ -5,10 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContactsAttempt"
              mc:Ignorable="d" 
-             d:Height="800" d:Width="1280" Background="AntiqueWhite">
+             d:Height="800" d:Width="1280">
+
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFFF926A" Offset="0.857"/>
+            <GradientStop Color="#FFFFD599" Offset="0"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
     <Grid>
-        <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="584,0,452,727" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <ListBox Name="ContactsListBox" Margin="10,159,960,98" FontFamily="Bahnschrift Light" FontSize="16" SelectionChanged="ListContacts_SelectionChanged"/>
+        <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="10,0,452,727" FontFamily="Bahnschrift" FontSize="64" TextDecorations="Underline" FontStyle="Italic"/>
+
+        
+        <!--<Menu Name ="mnuMain" VerticalAlignment="Top" Height="25" BorderBrush="#FEF9BF95" Background="#FEF9BF95">
+            <MenuItem Name="muiTheme" Header="Theme" FontFamily="Microsoft Yi Baiti" FontSize="16" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black" StaysOpenOnClick="True" BorderThickness="1,1,1,1">
+                <MenuItem Name="muiStyle" Header="Style" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black">
+                    <MenuItem Name="muiDefaultstyle" Header="Default" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black"/>
+                </MenuItem>
+                <MenuItem Name="muiFontSize" Header="Font size" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black">
+                    <MenuItem Name="muiFontNormal" Header="Normal" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black"/>
+                    <MenuItem Name="muiFontLarge" Header="Large" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>-->
+        
+
+        <ListBox Name="ContactsListBox" Margin="5,227,960,98" FontFamily="Bahnschrift Light" FontSize="16" SelectionChanged="ListContacts_SelectionChanged" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black"/>
         <Image Name="ImageId" Height="300" Width="300" Margin="373,75,597,404"/>
         <Label Name="NameId"  Content="First Name" Margin="698,80,10,640" FontFamily="Bahnschrift Light" FontSize="18" />
         <Label Name="StreetId" Content="Street Address" Margin="698,134,10,585" FontFamily="Bahnschrift Light" FontSize="18"/>
@@ -17,29 +39,29 @@
         <Label Name="ZipId" Content="ZIP" Margin="1087,189,10,535" FontSize="18" FontFamily="Bahnschrift Light" />
         <Label Name="EmailId" Content="Email" Margin="698,244,8,475" FontSize="18" FontFamily="Bahnschrift Light"/>
         <Label Name="PhoneId" Content="Phone" Margin="698,299,10,408" FontSize="18" FontFamily="Bahnschrift Light" />
-        <Label Content="BDay range" Margin="240,10,947,740" FontSize="14" FontFamily="Bahnschrift Light"></Label>
-        <Label Content="Search..." Margin="10,60,1200,692" FontSize="14" FontFamily="Bahnschrift Light"></Label>
+        <Label Content="BDay range" Margin="240,72,923,691" FontSize="14" FontFamily="Bahnschrift Light"></Label>
+        <Label Content="Search..." Margin="5,146,1200,626" FontSize="14" FontFamily="Bahnschrift Light"></Label>
 
-        <TextBox Name="SearchId" Text="" Height="40" Width="310" Margin="10,85,960,670" FontFamily="Bahnschrift Light" FontSize="18" TextChanged="SearchId_TextChanged"/>
+        <TextBox Name="SearchId" Text="" Width="315" Margin="5,174,960,585" FontFamily="Bahnschrift Light" FontSize="18" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" TextChanged="SearchId_TextChanged"/>
         <Label Name="WebId" Content="Website" Margin="374,420,8,288" RenderTransformOrigin="0.349,0.035" FontSize="18" FontFamily="Bahnschrift Light"/>
         <Label Name="WebBlock" Content="Website address" Margin="374,386,603,328" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Label Name="notesBlock" Content="Notes" Margin="374,471,682,248" FontFamily="Bahnschrift Light" FontSize="16"/>
         <Label Name="NotesId" Content="Sample note" Margin="374,500,10,128" FontFamily="Bahnschrift Light" FontSize="18" />
-        <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnDelete_Click"/>
-        <Button Content="Edit Contact"   Name="btnEdit" Margin="683,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click"/>
-        <Button Content="Add Contact"   x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click"/>
-        <Button Name="EmptyBtn" Margin="165,10,1040,740" Width="75" Height="50" Click="EmptyBtn_Click">
+        <Button Content="Delete Contact" Name="btnDelete" Margin="985,646,14,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnDelete_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <Button Content="Edit Contact"   Name="btnEdit" Margin="683,646,321,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnEdit_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <Button Content="Add Contact"  x:Name="btnAdd" Margin="395,646,624,43" FontFamily="Bahnschrift Light" FontSize="18" Click="btnAdd_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <Button Name="EmptyBtn" Margin="164,72,1041,654" MaxWidth="75" MaxHeight="75" Click="EmptyBtn_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black">
             <TextBlock Text="Empty inactive contacts" TextWrapping="Wrap" TextAlignment="Center"/>
-            </Button>
-        <Button Name="SortAzBtn" Content="Sort A-Z" Margin="5,10,1200,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortAZBtn_Click"/>
-        <Button Name="SortZaBtn" Content="Sort Z-A" Margin="85,10,1120,740" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="SortZABtn_Click"/>
-        <Button Name="ShowInactiveBtn" Margin="116,721,1053,24" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="ShowBtnTxt_Click">
+        </Button>
+        <Button Name="SortAzBtn" Content="Sort A-Z" Margin="5,72,1200,654" MinWidth="75" MinHeight="70" MaxWidth="75" Click="SortAZBtn_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <Button Name="SortZaBtn" Content="Sort Z-A" Margin="82,72,1120,654" MinWidth="75" MinHeight="70"  MaxWidth="75" Click="SortZABtn_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <Button Name="ShowInactiveBtn" Margin="5,711,1122,14" MinWidth="75"  MaxHeight="75" MaxWidth="160" Click="ShowBtnTxt_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black">
             <TextBlock Name="ShowBtnTxt" Text="Show inactive contacts" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
-        <Button Name="RestoreBtn" Content="Restore" Margin="232,721,973,24" MinWidth="75" MinHeight="50" MaxHeight="50" MaxWidth="75" Click="RestoreBtn_Click"/>
-        <TextBox Name="TxtBdayRange" TextWrapping="Wrap" Margin="240,35,960,740" MaxLength="3" TextChanged="TxtBdayRange_TextChanged"/>
+        <Button Name="RestoreBtn" Content="Restore" Margin="158,707,958,10" MinWidth="75" MaxHeight="75" MaxWidth="160" Click="RestoreBtn_Click" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black"/>
+        <TextBox Name="TxtBdayRange" TextWrapping="Wrap" Margin="242,108,960,654" MaxLength="3" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" TextChanged="TxtBdayRange_TextChanged"/>
 
-        <ContentControl x:Name="CC" Grid.Column="0" />
+        <ContentControl x:Name="CC" Grid.Column="0"/>
 
     </Grid>
 </UserControl>

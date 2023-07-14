@@ -144,7 +144,8 @@ namespace ContactsAttempt {
         private void ConfirmBtn_Click(object sender, RoutedEventArgs e) {
 
             if (NewFirstName.Text == "" && NewNickname.Text == "") {
-                MessageBox.Show("Contact requires first name or nickname");
+                //MessageBox.Show("Contact requires first name or nickname");
+                NewFirstName.BorderBrush = Brushes.MediumVioletRed;
                 return;
             }
 
@@ -157,7 +158,10 @@ namespace ContactsAttempt {
                 AddContactToDatabase(newContact);
                 CC.Content = new HomeScreen();
             } else if (NewMonth.Text.Length != 2 || NewDay.Text.Length != 2 || NewYear.Text.Length != 4) {
-                MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
+                //MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
+                NewMonth.BorderBrush = Brushes.MediumVioletRed;
+                NewDay.BorderBrush = Brushes.MediumVioletRed;
+                NewYear.BorderBrush = Brushes.MediumVioletRed;
             } else {
                 Contact newContact = CreateContact();
                 AddContactToDatabase(newContact);

@@ -5,27 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContactsAttempt"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1280" Background="AntiqueWhite">
+             d:DesignHeight="800" d:DesignWidth="1280">
+
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFFF926A" Offset="0.857"/>
+            <GradientStop Color="#FFFFD599" Offset="0"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+    
     <Grid Height="800" VerticalAlignment="Center">
 
         <TextBlock TextWrapping="Wrap" Text="Edit Contacts" Height="NaN" Margin="571,18,465,709" FontFamily="Bahnschrift" FontSize="26" TextDecorations="Underline" FontStyle="Italic"/>
-        <TextBox Name="EditFirstName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,78,688,652"/>
-        <TextBox Name="EditMidName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,153,688,577"/>
-        <TextBox Name="EditLastName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,228,688,502"/>
-        <TextBox Name="EditNickname" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,303,688,427"/>
-        <TextBox Name="EditTitle" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,378,688,352"/>
-        <TextBox Name="EditMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="257,453,955,277" MaxLength="2"/>
-        <TextBox Name="EditDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="372,453,840,277"   MaxLength="2"/>
-        <TextBox Name="EditYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="503,453,688,277"  MaxLength="4"/>
-        <TextBox Name="EditEmail" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,528,688,202"/>
-        <TextBox Name="EditPhone" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,603,688,127"/>
-        <TextBox Name="EditStreet" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="205,678,688,52"/>
-        <TextBox Name="EditCity" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,78,108,652"/>
-        <TextBox Name="EditState" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,153,108,577"/>
-        <TextBox Name="EditZip" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,228,108,502"/>
-        <TextBox Name="EditCountry" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,303,108,427"/>
-        <TextBox Name="EditWebsite" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,378,108,352"/>
-        <TextBox Name="EditNotes" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,453,108,277"/>
+        <TextBox Name="EditFirstName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,78,688,652"/>
+        <TextBox Name="EditMidName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,153,688,577"/>
+        <TextBox Name="EditLastName" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,228,688,502"/>
+        <TextBox Name="EditNickname" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,303,688,427"/>
+        <TextBox Name="EditTitle" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,378,688,352"/>
+        <TextBox Name="EditMonth" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="257,453,955,277" MaxLength="2"/>
+        <TextBox Name="EditDay" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="372,453,840,277"   MaxLength="2"/>
+        <TextBox Name="EditYear" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="503,453,688,277"  MaxLength="4"/>
+        <TextBox Name="EditEmail" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,528,688,202"/>
+        <TextBox Name="EditPhone" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,603,688,127"/>
+        <TextBox Name="EditStreet" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="205,678,688,52"/>
+        <TextBox Name="EditCity" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,78,108,652"/>
+        <TextBox Name="EditState" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,153,108,577"/>
+        <TextBox Name="EditZip" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,228,108,502"/>
+        <TextBox Name="EditCountry" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,303,108,427"/>
+        <TextBox Name="EditWebsite" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,378,108,352"/>
+        <TextBox Name="EditNotes" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift Light" Background="#19000000" BorderThickness="2,2,2,2" BorderBrush="Black" Margin="785,453,108,277"/>
         
         <Label Content="First name      :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,96,1080,670"/>
         <Label Content="Middle name   :" FontSize="22" FontFamily="Bahnschrift Light" Margin="18,171,1080,595"/>
@@ -47,9 +55,9 @@
         <Label Content="Notes             :" FontSize="22" FontFamily="Bahnschrift Light" Margin="606,475,500,291"/>
 
         <CheckBox Name="btnFavorite" Content="Favorite" FontSize="26" FontFamily="Bahnschrift Light" Margin="785,546,91,189" />
-        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Click="UploadBtn_Click"/>
-        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="LightGreen" Click="ConfirmBtn_Click"/>
-        <Button Content="Cancel"  FontSize="26" FontFamily="Bahnschrift Light" Margin="980,678,108,52" Background="Red" Click="CancelBtn_Click"/>
+        <Button Content="Upload Photo"  FontSize="26" FontFamily="Bahnschrift Light" Margin="785,603,108,127" Background="#B2FFAC47" BorderThickness="2" BorderBrush="Black" Click="UploadBtn_Click"/>
+        <Button Content="Confirm"  FontSize="26" FontFamily="Bahnschrift Light" Margin="786,678,302,52" Background="#B290EE90" BorderThickness="2" BorderBrush="Black" Click="ConfirmBtn_Click"/>
+        <Button Content="Cancel"  FontSize="26" FontFamily="Bahnschrift Light" Margin="980,678,108,52" Background="#B2FF0000" BorderThickness="2" BorderBrush="Black" Click="CancelBtn_Click"/>
 
         <ContentControl x:Name="CC" Grid.Column="0"/>
 
