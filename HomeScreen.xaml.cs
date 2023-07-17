@@ -36,6 +36,7 @@ namespace ContactsAttempt {
                 Contact.currentContact = Contact.activeContactsList[0];
                 Contact.currentContact = ReadSavedContact();
                 ButtonsCheck();
+                SetFontSize(Contact.FontSize);
                 UpdateContactScreen(Contact.currentContact);
             }
         }
@@ -70,13 +71,28 @@ namespace ContactsAttempt {
         }
 
         private void SortAZBtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName ASC");
-            ContactsListBox.ItemsSource = Contact.activeContactsList;
+            if (SortAzBtn.Content == "Sort A-Z") {
+                Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName ASC");
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
+
+                SortAzBtn.Content = "Sort Z-A";
+            } else {
+                Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName DESC");
+                ContactsListBox.ItemsSource = Contact.activeContactsList;
+
+                SortAzBtn.Content = "Sort A-Z";
+            }
         }
 
-        private void SortZABtn_Click(object sender, RoutedEventArgs e) {
-            Contact.activeContactsList = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' ORDER BY firstName DESC");
-            ContactsListBox.ItemsSource = Contact.activeContactsList;
+        private void FontSizeBtn_Click(object sender, RoutedEventArgs e) {
+
+            if (Contact.FontSize == "Large") {
+                Contact.FontSize = "Normal";
+            } else {
+                Contact.FontSize = "Large";
+            }
+
+            SetFontSize(Contact.FontSize);
         }
 
         private void EmptyBtn_Click(object sender, RoutedEventArgs e) {
@@ -87,16 +103,16 @@ namespace ContactsAttempt {
         }
 
         private void ShowBtnTxt_Click(object sender, RoutedEventArgs e) {
-            if (ShowBtnTxt.Text == "Show inactive contacts") {
+            if (ShowBtnTxt.Text == "Show inactive") {
                 Contact.inactiveContactsList = CheckInactiveContacts();
                 ContactsListBox.ItemsSource = Contact.inactiveContactsList;
 
-                ShowBtnTxt.Text = "Show active contacts";
+                ShowBtnTxt.Text = "Show active";
             } else {
                 Contact.activeContactsList = CheckActiveContacts();
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
 
-                ShowBtnTxt.Text = "Show inactive contacts";
+                ShowBtnTxt.Text = "Show inactive";
             }
         }
 
@@ -154,9 +170,9 @@ namespace ContactsAttempt {
             EmptyBtn.Visibility = Visibility.Hidden;
             Contact.inactiveContactsList.Clear();
 
-            if (ShowBtnTxt.Text == "Show active contacts") {
+            if (ShowBtnTxt.Text == "Show active") {
                 ContactsListBox.ItemsSource = CheckActiveContacts().ToList();
-                ShowBtnTxt.Text = "Show inactive contacts";
+                ShowBtnTxt.Text = "Show inactive";
             }
 
             return Contact.inactiveContactsList;
@@ -192,7 +208,7 @@ namespace ContactsAttempt {
                 List<Contact> contactSearch = SqlQueryList($"SELECT * FROM tblContact WHERE isActive = '1' AND firstName LIKE '%{SearchId.Text}%' OR lastName LIKE '%{SearchId.Text}%'");
                 ContactsListBox.ItemsSource = contactSearch;
             }
-            ShowBtnTxt.Text = "Show inactive contacts";
+            ShowBtnTxt.Text = "Show inactive";
         }
 
         private void TxtBdayRange_TextChanged(object sender, EventArgs e) {
@@ -228,7 +244,7 @@ namespace ContactsAttempt {
             } else {
                 ContactsListBox.ItemsSource = Contact.activeContactsList;
             }
-            ShowBtnTxt.Text = "Show inactive contacts";
+            ShowBtnTxt.Text = "Show inactive";
         }
 
         private void UpdateContactScreen(Contact currentContact) {
@@ -271,7 +287,6 @@ namespace ContactsAttempt {
                 btnEdit.Visibility = Visibility.Hidden;
                 btnDelete.Visibility = Visibility.Hidden;
                 SortAzBtn.Visibility = Visibility.Hidden;
-                SortZaBtn.Visibility = Visibility.Hidden;
             }
 
             if (Contact.inactiveContactsList.Count == 0) {
@@ -284,6 +299,65 @@ namespace ContactsAttempt {
             } else {
                 RestoreBtn.Visibility = Visibility.Visible;
                 btnDelete.Visibility = Visibility.Hidden;
+            }
+
+            if (Contact.FontSize == null) {
+                Contact.FontSize = "Normal";
+            }
+            SortAzBtn.Content = "Sort A-Z";
+        }
+
+        private void SetFontSize(string fontSetting) { 
+
+            if (fontSetting == "Large") {
+                NameId.FontSize = 26;
+                StreetId.FontSize = 26;
+                CityId.FontSize = 26;
+                StateId.FontSize = 26;
+                ZipId.FontSize = 26;
+                EmailId.FontSize = 26;
+                PhoneId.FontSize = 26;
+                WebId.FontSize = 26;
+                NotesId.FontSize = 26;
+                WebBlock.FontSize = 22;
+                notesBlock.FontSize = 22;
+                ContactsListBox.FontSize = 24;
+
+                btnAdd.FontSize = 26;
+                btnDelete.FontSize = 26;
+                btnEdit.FontSize = 26;
+                EmptyBtn.FontSize = 16;
+                RestoreBtn.FontSize = 26;
+                SortAzBtn.FontSize = 16;
+                FontSizeBtn.FontSize = 16;
+                ShowBtnTxt.FontSize = 26;
+                lblSearch.FontSize = 20;
+                lblRange.FontSize = 20;
+
+            } else if (fontSetting == "Normal") {
+                NameId.FontSize = 18;
+                StreetId.FontSize = 18;
+                CityId.FontSize = 18;
+                StateId.FontSize = 18;
+                ZipId.FontSize = 18;
+                EmailId.FontSize = 18;
+                PhoneId.FontSize = 18;
+                WebId.FontSize = 18;
+                NotesId.FontSize = 18;
+                WebBlock.FontSize = 16;
+                notesBlock.FontSize = 16;
+                ContactsListBox.FontSize = 16;
+
+                btnAdd.FontSize = 16;
+                btnDelete.FontSize = 16;
+                btnEdit.FontSize = 16;
+                EmptyBtn.FontSize = 16;
+                RestoreBtn.FontSize = 16;
+                ShowBtnTxt.FontSize = 16;
+                SortAzBtn.FontSize = 16;
+                FontSizeBtn.FontSize = 16;
+                lblSearch.FontSize = 14;
+                lblRange.FontSize = 14;
             }
         }
 
@@ -331,6 +405,10 @@ namespace ContactsAttempt {
                 List<Contact> saved = SqlQueryList($"SELECT * FROM tblContact WHERE id = '{contactId}'");
                 if (saved.Count > 0) {
                     Contact.currentContact = saved[0];
+
+                    if (Contact.currentContact.IsActive == false) {
+                        Contact.currentContact = Contact.activeContactsList[0];
+                    }
                     return Contact.currentContact;
                 }
                 return Contact.currentContact;

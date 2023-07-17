@@ -13,6 +13,7 @@ namespace ContactsAttempt {
     public class Contact {
 
         public static string DatabaseName { get; set; }
+        public static string FontSize { get; set; }
         public static Contact currentContact { get; set; }
         public static List<Contact> contactsList { get; set; }
         public static List<Contact> activeContactsList { get; set; }
