@@ -21,10 +21,13 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class MainWindow : Window {
 
-        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
 
         public MainWindow() {
             InitializeComponent();
+            EnterBtn.Visibility = Visibility.Hidden;
+            Contact.contactsList = GetData();
+            CC.Content = new HomeScreen();
         }
 
         #region SQL
@@ -55,44 +58,40 @@ namespace ContactsAttempt {
 
         #region XAML controls
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) {
-
-        }
-
         #endregion
 
         private void EnterBtn_Click(object sender, RoutedEventArgs e) {
-            Contact.DatabaseName = DatabaseBox.Text;
+        //    Contact.DatabaseName = DatabaseBox.Text;
 
-            bool allSpaces = true;
-            for (int i = 0; i < Contact.DatabaseName.Length; i++) {
-                if (Contact.DatabaseName[i] != ' ') {
-                    allSpaces = false;
-                }
-            }
+        //    bool allSpaces = true;
+        //    for (int i = 0; i < Contact.DatabaseName.Length; i++) {
+        //        if (Contact.DatabaseName[i] != ' ') {
+        //            allSpaces = false;
+        //        }
+        //    }
 
-            if (Contact.DatabaseName == "" || allSpaces) {
-                FailedLbl.Content = "Name cannot be null";
-                FailedLbl.Opacity = 100;
-                return;
-            }
+        //    if (Contact.DatabaseName == "" || allSpaces) {
+        //        FailedLbl.Content = "Name cannot be null";
+        //        FailedLbl.Opacity = 100;
+        //        return;
+        //    }
 
-            connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
+        //    connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
 
-            bool connected = TestConnection();
+        //    bool connected = TestConnection();
 
-            if (connected) {
+        //    if (connected) {
 
-                FailedLbl.Opacity = 0;
-                EnterBtn.Visibility = Visibility.Collapsed;
+        //        FailedLbl.Opacity = 0;
+        //        EnterBtn.Visibility = Visibility.Collapsed;
 
-                Contact.contactsList = GetData();
+        //        Contact.contactsList = GetData();
 
-                CC.Content = new HomeScreen();
-            } else {
-                FailedLbl.Content = "Connection Failed";
-                FailedLbl.Opacity = 100;
-            }
+        //        CC.Content = new HomeScreen();
+        //    } else {
+        //        FailedLbl.Content = "Connection Failed";
+        //        FailedLbl.Opacity = 100;
+        //    }
         }
     }
 }

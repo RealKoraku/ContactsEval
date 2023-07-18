@@ -22,7 +22,7 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class HomeScreen : UserControl {
 
-        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
 
         public HomeScreen() {
             InitializeComponent();

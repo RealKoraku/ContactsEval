@@ -13,9 +13,9 @@
             <GradientStop Color="#FFFFD599" Offset="0"/>
         </LinearGradientBrush>
     </UserControl.Background>
+    
     <Grid>
         <TextBlock TextWrapping="Wrap" Text="Contacts" Height="NaN" Margin="10,0,452,727" FontFamily="Bahnschrift" FontSize="64" TextDecorations="Underline" FontStyle="Italic"/>
-
 
         <!--<Menu Name ="mnuMain" VerticalAlignment="Top" Height="25" BorderBrush="#FEF9BF95" Background="#FEF9BF95">
             <MenuItem Name="muiTheme" Header="Theme" FontFamily="Microsoft Yi Baiti" FontSize="16" Background="#FFFFBF7E" BorderBrush="Black" Foreground="Black" StaysOpenOnClick="True" BorderThickness="1,1,1,1">

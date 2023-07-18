@@ -26,7 +26,7 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class EditContact : UserControl {
 
-        static string connectionString = $"Server=localhost;Database={Contact.DatabaseName};Trusted_Connection=true";
+        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
         static string ContactImagePath;
         static string firstName = Contact.currentContact.FirstName;
         static string lastName = Contact.currentContact.LastName;

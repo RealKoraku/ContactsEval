@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactsAttempt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="840" Width="1300" Background="AntiqueWhite" Loaded="Window_Loaded">
+        Title="MainWindow" Height="840" Width="1300" Background="AntiqueWhite">
     <Grid>
         <Label Content="Enter database name:" Margin="300,240,320,461" FontSize="26" FontFamily="Bahnschrift"/>
         <TextBox Name="DatabaseBox" TextWrapping="Wrap" Text="" FontSize="26" FontFamily="Bahnschrift" Margin="300,289,219,469"/>
