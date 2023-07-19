@@ -405,26 +405,32 @@ namespace ContactsAttempt {
             }
         }
 
+        private Contact SqlQueryContact(string query) {
+            var connection = new SqlConnection(connectionString);
+            using (connection) {
+                return connection.Query<Contact>($"{query}").First();
+            }
+        }
+
         #endregion
 
         #region FileIO
 
         private Contact ReadSavedContact() {
-            string path = "C:\\Users\\MCA Coder\\Desktop\\savedContact.txt";
+            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\savedContact.txt";
             string saveContactId = $"{Contact.currentContact.Id}";
 
             if (File.Exists(path)) {
                 string contactId = File.ReadAllText(path);
 
-                List<Contact> saved = SqlQueryList($"SELECT * FROM tblContact WHERE id = '{contactId}'");
-                if (saved.Count > 0) {
-                    Contact.currentContact = saved[0];
+                Contact saved = SqlQueryContact($"SELECT * FROM tblContact WHERE id = '{contactId}'");
+                
+                Contact.currentContact = saved;
 
                     if (Contact.currentContact.IsActive == false) {
                         Contact.currentContact = Contact.activeContactsList[0];
                     }
-                    return Contact.currentContact;
-                }
+
                 return Contact.currentContact;
         
             } else {
@@ -437,7 +443,7 @@ namespace ContactsAttempt {
         }
 
         private void SaveContact(Contact currentContact) {
-            string path = "C:\\Users\\MCA Coder\\Desktop\\savedContact.txt";
+            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\savedContact.txt";
 
             try {
                 File.WriteAllText(path, currentContact.Id.ToString());
