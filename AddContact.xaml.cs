@@ -102,6 +102,7 @@ namespace ContactsAttempt {
             newContact.IsActive = true;
 
             return newContact;
+
         }
 
         private void AddContactToDatabase(Contact newContact) {

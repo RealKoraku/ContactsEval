@@ -40,12 +40,18 @@ namespace ContactsAttempt {
         public bool IsActive { get; set; }
 
         public override string ToString() {
+            string displayName = "";
 
             if (IsFavorite) {
-                return $"★ {FirstName} {LastName}";
-            } else {
-                return $"{FirstName} {LastName}";
+                displayName += "★";
             }
+
+            if (string.IsNullOrEmpty(FirstName) && string.IsNullOrEmpty(LastName)) {                         
+                displayName += Nickname;
+            } else {
+                displayName += $"{FirstName} {LastName}";
+            }
+            return displayName;
         }
     }
 }

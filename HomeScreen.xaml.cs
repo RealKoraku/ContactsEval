@@ -252,10 +252,14 @@ namespace ContactsAttempt {
                 currentContact = Contact.activeContactsList[0];
                 Contact.currentContact = currentContact;
             }
-            if (currentContact.Nickname != null && currentContact.Nickname != "") {
-                NameId.Content = currentContact.Nickname + " " + $"({currentContact.FirstName})" + " " + currentContact.MiddleName + " " + currentContact.LastName;
+            if (string.IsNullOrEmpty(currentContact.Nickname) == false) {
+                if (string.IsNullOrEmpty(currentContact.FirstName) == false) {
+                    NameId.Content = currentContact.Title + " " + currentContact.Nickname + " " + $"({currentContact.FirstName})" + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                } else { 
+                    NameId.Content = currentContact.Title + " " + currentContact.Nickname + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                }
             } else {
-                NameId.Content = currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                NameId.Content = currentContact.Title + " " + currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
             }
 
             StreetId.Content = currentContact.Street;
@@ -267,7 +271,7 @@ namespace ContactsAttempt {
             WebId.Content = currentContact.Website;
             NotesId.Content = currentContact.Notes;
 
-            if (currentContact.Picture != null && currentContact.Picture != "") {
+            if (string.IsNullOrEmpty(currentContact.Picture) == false) {
                 LoadImage(currentContact.Picture);
             } else {
                 ImageId.Source = null;
