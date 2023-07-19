@@ -254,12 +254,22 @@ namespace ContactsAttempt {
             }
             if (string.IsNullOrEmpty(currentContact.Nickname) == false) {
                 if (string.IsNullOrEmpty(currentContact.FirstName) == false) {
-                    NameId.Content = currentContact.Title + " " + currentContact.Nickname + " " + $"({currentContact.FirstName})" + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                    NameId.Content = currentContact.Title + " " 
+                        + currentContact.Nickname + " "
+                        + $"({currentContact.FirstName})" + " " 
+                        + currentContact.MiddleName + " " 
+                        + currentContact.LastName;
                 } else { 
-                    NameId.Content = currentContact.Title + " " + currentContact.Nickname + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                    NameId.Content = currentContact.Title + " " 
+                        + currentContact.Nickname + " " 
+                        + currentContact.MiddleName + 
+                        " " + currentContact.LastName;
                 }
             } else {
-                NameId.Content = currentContact.Title + " " + currentContact.FirstName + " " + currentContact.MiddleName + " " + currentContact.LastName;
+                NameId.Content = currentContact.Title + " " 
+                    + currentContact.FirstName + " " 
+                    + currentContact.MiddleName + " " 
+                    + currentContact.LastName;
             }
 
             StreetId.Content = currentContact.Street;

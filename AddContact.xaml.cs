@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -138,7 +139,12 @@ namespace ContactsAttempt {
             if (result == true) {
                 //STORE FILE PATH
                 string selectedFile = openFileDialog.FileName;
-                newContactImagePath = selectedFile;
+                string destinationFolder = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\";
+                string destinationFileName = System.IO.Path.GetFileName(selectedFile);
+                string destinationFilePath = System.IO.Path.Combine(destinationFolder, destinationFileName);
+
+                File.Copy(selectedFile, destinationFilePath, true);
+                newContactImagePath = destinationFolder + destinationFileName;
             }
         }
 
@@ -146,7 +152,8 @@ namespace ContactsAttempt {
 
             if (NewFirstName.Text == "" && NewNickname.Text == "") {
                 //MessageBox.Show("Contact requires first name or nickname");
-                NewFirstName.BorderBrush = Brushes.MediumVioletRed;
+                NewFirstName.BorderBrush = Brushes.Red;
+                
                 return;
             }
 
@@ -160,9 +167,9 @@ namespace ContactsAttempt {
                 CC.Content = new HomeScreen();
             } else if (NewMonth.Text.Length != 2 || NewDay.Text.Length != 2 || NewYear.Text.Length != 4) {
                 //MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
-                NewMonth.BorderBrush = Brushes.MediumVioletRed;
-                NewDay.BorderBrush = Brushes.MediumVioletRed;
-                NewYear.BorderBrush = Brushes.MediumVioletRed;
+                NewMonth.BorderBrush = Brushes.Red;
+                NewDay.BorderBrush = Brushes.Red;
+                NewYear.BorderBrush = Brushes.Red;
             } else {
                 Contact newContact = CreateContact();
                 AddContactToDatabase(newContact);

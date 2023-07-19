@@ -196,7 +196,7 @@ namespace ContactsAttempt {
 
             if (EditFirstName.Text == "" && EditNickname.Text == "") {
                 //MessageBox.Show("Contact requires first name or nickname", "Required fields");
-                EditFirstName.BorderBrush = Brushes.MediumVioletRed;
+                EditFirstName.BorderBrush = Brushes.Red;
                 return;
             }
 
@@ -209,9 +209,9 @@ namespace ContactsAttempt {
                 
             } else if (EditMonth.Text.Length != 2 || EditDay.Text.Length != 2 || EditYear.Text.Length != 4) {
                 //MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
-                EditMonth.BorderBrush = Brushes.MediumVioletRed;
-                EditDay.BorderBrush = Brushes.MediumVioletRed;
-                EditYear.BorderBrush = Brushes.MediumVioletRed;
+                EditMonth.BorderBrush = Brushes.Red;
+                EditDay.BorderBrush = Brushes.Red;
+                EditYear.BorderBrush = Brushes.Red;
                 //MessageBox.Show("Incorrect date format (MM/DD/YYYY)", "Incorrect Date");
             } else { 
                 Contact.currentContact = UpdateContact(Contact.currentContact);
