@@ -109,6 +109,35 @@ namespace ContactsAttempt {
 
         private Contact UpdateContact(Contact selectedContact) {
 
+            string[] fields = {
+                EditFirstName.Text, 
+                EditMidName.Text, 
+                EditLastName.Text, 
+                EditNickname.Text, 
+                EditTitle.Text, 
+                EditEmail.Text, 
+                EditPhone.Text, 
+                EditStreet.Text, 
+                EditCity.Text, 
+                EditState.Text, 
+                EditZip.Text, 
+                EditCountry.Text, 
+                EditWebsite.Text, 
+                EditNotes.Text
+                };
+
+            for (int field = 0; field < fields.Length; field++) {
+                string newField = "";
+                for (int chars = 0; chars < fields[field].Length; chars++) {
+                    if (fields[field][chars] == '\'') {
+                        newField += "";
+                    } else {
+                        newField += fields[field][chars];
+                    }
+                }
+                fields[field] = newField;
+            }
+
             string birthDateString = "null";
             if (EditYear.Text == "0000") {
                 birthDateString = "null";
@@ -118,21 +147,20 @@ namespace ContactsAttempt {
 
             string favString;
 
-            selectedContact.FirstName = EditFirstName.Text;
-            selectedContact.MiddleName = EditMidName.Text;
-            selectedContact.LastName = EditLastName.Text;
-            selectedContact.Nickname = EditNickname.Text;
-            selectedContact.Title = EditTitle.Text;
-            selectedContact.Email = EditEmail.Text;
-            selectedContact.Phone = EditPhone.Text;
-            selectedContact.Street = EditStreet.Text;
-            selectedContact.City = EditCity.Text;
-            selectedContact.State = EditState.Text;
-            selectedContact.ZipCode = EditZip.Text;
-            selectedContact.Country = EditCountry.Text;
-            selectedContact.Website = EditWebsite.Text;
-            selectedContact.Notes = EditNotes.Text;
-            selectedContact.BirthDate = birthDateString;
+            selectedContact.FirstName = fields[0];
+            selectedContact.MiddleName = fields[1];
+            selectedContact.LastName = fields[2];
+            selectedContact.Nickname = fields[3];
+            selectedContact.Title = fields[4];
+            selectedContact.Email = fields[5];
+            selectedContact.Phone = fields[6];
+            selectedContact.Street = fields[7];
+            selectedContact.City = fields[8];
+            selectedContact.State = fields[9];
+            selectedContact.ZipCode = fields[10];
+            selectedContact.Country = fields[11];
+            selectedContact.Website = fields[12];
+            selectedContact.Notes = fields[13];
 
             bool favorite = (bool)btnFavorite.IsChecked;
 
@@ -142,19 +170,6 @@ namespace ContactsAttempt {
             } else {
                 selectedContact.IsFavorite = false;
                 favString = "0";
-            }
-
-            if (selectedContact.Notes.Contains("\'")) {
-
-                string newNotes = "";
-                for (int i = 0; i < EditNotes.Text.Length; i++) {
-                    if (selectedContact.Notes[i] == '\'') {
-                        newNotes += "";
-                    } else {
-                        newNotes += selectedContact.Notes[i];
-                    }
-                }
-                selectedContact.Notes = newNotes;
             }
 
             if (ContactImagePath != null) {

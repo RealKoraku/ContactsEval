@@ -132,7 +132,7 @@ namespace ContactsAttempt {
 
             #region XAML controls
 
-            private List<Contact> CheckActiveContacts() {
+        private List<Contact> CheckActiveContacts() {
             Contact.activeContactsList = new List<Contact>();
 
             for (int i = 0; i < Contact.contactsList.Count; i++) {

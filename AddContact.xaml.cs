@@ -33,23 +33,52 @@ namespace ContactsAttempt {
         private Contact CreateContact() {
             Contact newContact = new Contact();
 
+            string[] fields = {
+                NewFirstName.Text,
+                NewMidName.Text,
+                NewLastName.Text,
+                NewNickname.Text,
+                NewTitle.Text,
+                NewEmail.Text,
+                NewPhone.Text,
+                NewStreet.Text,
+                NewCity.Text,
+                NewState.Text,
+                NewZip.Text,
+                NewCountry.Text,
+                NewWebsite.Text,
+                NewNotes.Text
+                };
+
+            for (int field = 0; field < fields.Length; field++) {
+                string newField = "";
+                for (int chars = 0; chars < fields[field].Length; chars++) {
+                    if (fields[field][chars] == '\'') {
+                        newField += "";
+                    } else {
+                        newField += fields[field][chars];
+                    }
+                }
+                fields[field] = newField;
+            }
+
+            newContact.FirstName = fields[0];
+            newContact.MiddleName = fields[1];
+            newContact.LastName = fields[2];
+            newContact.Nickname = fields[3];
+            newContact.Title = fields[4];
+            newContact.Email = fields[5];
+            newContact.Phone = fields[6];
+            newContact.Street = fields[7];
+            newContact.City = fields[8];
+            newContact.State = fields[9];
+            newContact.ZipCode = fields[10];
+            newContact.Country = fields[11];
+            newContact.Website = fields[12];
+            newContact.Notes = fields[13];
+
             string favString;
 
-            if (NewFirstName.Text != null) {
-                newContact.FirstName = NewFirstName.Text;
-            }
-            if (NewMidName.Text != null) {
-                newContact.MiddleName = NewMidName.Text;
-            }
-            if (NewLastName.Text != null) {
-                newContact.LastName = NewLastName.Text;
-            }
-            if (NewNickname.Text != null) {
-                newContact.Nickname = NewNickname.Text;
-            }
-            if (NewTitle.Text != null) {
-                newContact.Title = NewTitle.Text;
-            }
             if (NewDay.Text != "00" && NewMonth.Text != "00" && NewYear.Text != "0000") {
 
                 string birthDateString = $"'{NewYear.Text}-{NewMonth.Text}-{NewDay.Text}'";
@@ -59,33 +88,6 @@ namespace ContactsAttempt {
                 newContact.BirthDate = "null";
             }
 
-            if (NewEmail.Text != null) {
-                newContact.Email = NewEmail.Text;
-            }
-            if (NewPhone.Text != null) {
-                newContact.Phone = NewPhone.Text;
-            }
-            if (NewStreet.Text != null) {
-                newContact.Street = NewStreet.Text;
-            }
-            if (NewCity.Text != null) {
-                newContact.City = NewCity.Text;
-            }
-            if (NewState.Text != null) {
-                newContact.State = NewState.Text;
-            }
-            if (NewZip.Text != null) {
-                newContact.ZipCode = NewZip.Text;
-            }
-            if (NewCountry.Text != null) {
-                newContact.Country = NewCountry.Text;
-            }
-            if (NewWebsite.Text != null) {
-                newContact.Website = NewWebsite.Text;
-            }
-            if (NewNotes.Text != null) {
-                newContact.Notes = NewNotes.Text;
-            }
             if (newContactImagePath != null) {
                 newContact.Picture = newContactImagePath;
             }
@@ -153,8 +155,9 @@ namespace ContactsAttempt {
             if (NewFirstName.Text == "" && NewNickname.Text == "") {
                 //MessageBox.Show("Contact requires first name or nickname");
                 NewFirstName.BorderBrush = Brushes.Red;
-                
                 return;
+            } else {
+                NewFirstName.BorderBrush = Brushes.Black;
             }
 
             if (NewYear.Text.Length == 0 && NewMonth.Text.Length == 0 && NewDay.Text.Length == 0) {
