@@ -203,7 +203,13 @@ namespace ContactsAttempt {
             if (result == true) {
                 //STORE FILE PATH
                 string selectedFile = openFileDialog.FileName;
-                ContactImagePath = selectedFile;
+                var workingDirectory = Environment.CurrentDirectory;
+                string destinationFolder = $"{workingDirectory}\\";
+                string destinationFileName = System.IO.Path.GetFileName(selectedFile);
+                string destinationFilePath = System.IO.Path.Combine(destinationFolder, destinationFileName);
+
+                File.Copy(selectedFile, destinationFilePath, true);
+                ContactImagePath = destinationFolder + destinationFileName;
             }
         }
 
