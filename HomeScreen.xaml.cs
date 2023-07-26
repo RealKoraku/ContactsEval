@@ -422,7 +422,9 @@ namespace ContactsAttempt {
         #region FileIO
 
         private Contact ReadSavedContact() {
-            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\savedContact.txt";
+            var workingDirectory = Environment.CurrentDirectory;
+            string path = $"{workingDirectory}\\savedContact.txt";
+
             string saveContactId = $"{Contact.currentContact.Id}";
 
             if (File.Exists(path)) {
