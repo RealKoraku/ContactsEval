@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 using Dapper;
 
 namespace ContactsAttempt {
@@ -21,11 +22,12 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class MainWindow : Window {
 
-        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = Contact.ConnectionString;
+        static SqlConnection connection = new SqlConnection(connectionString);
 
         public MainWindow() {
             InitializeComponent();
-            EnterBtn.Visibility = Visibility.Hidden;
+            ReadConnectionString();
             Contact.contactsList = GetData();
             CC.Content = new HomeScreen();
         }
@@ -48,9 +50,24 @@ namespace ContactsAttempt {
         }
 
         private List<Contact> GetData() {
-            var connection = new SqlConnection(connectionString);
-            using(connection) {
-                return connection.Query<Contact>("SELECT * FROM tblContact").ToList();
+            var newConnection = new SqlConnection(connectionString);
+            using(newConnection) {
+                return newConnection.Query<Contact>("SELECT * FROM tblContact").ToList();
+            }
+        }
+
+        private void ReadConnectionString() {
+
+            var workingDirectory = Environment.CurrentDirectory;
+            string path = $"{workingDirectory}\\connectionString.txt";
+
+            if (File.Exists(path)) {
+                Contact.ConnectionString = File.ReadAllText(path);
+                connectionString = Contact.ConnectionString;
+            } else {
+                try {
+                    File.WriteAllText(path, "Server=localhost;Database=Contacts;Trusted_Connection=true");
+                } catch (Exception error) { }
             }
         }
 

@@ -12,7 +12,7 @@
         <Label Name="FailedLbl" Content="Connection Failed"  Margin="300,360,320,350" FontSize="26" FontFamily="Bahnschrift" Opacity="0" Foreground="DarkRed"/>
 
         <ContentControl x:Name="CC" Grid.Column="0" />
-        <Button Name="EnterBtn" Content="Enter" Margin="1086,289,75,469" Background="LightGreen" Click="EnterBtn_Click"/>
+        <Button Name="EnterBtn" Content="Enter" Margin="1086,289,75,469" Background="LightGreen" Visibility="Hidden" Click="EnterBtn_Click"/>
 
     </Grid>
 </Window>

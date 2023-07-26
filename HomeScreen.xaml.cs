@@ -22,11 +22,12 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class HomeScreen : UserControl {
 
-        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = Contact.ConnectionString;
+        //static SqlConnection connection = new SqlConnection(connectionString);
+        //Trying to use public connection causes crash;
 
         public HomeScreen() {
             InitializeComponent();
-
             Contact.contactsList = SQLCheck();
             Contact.activeContactsList = CheckActiveContacts();
             Contact.inactiveContactsList = CheckInactiveContacts();
@@ -179,9 +180,9 @@ namespace ContactsAttempt {
         }
 
         private List<Contact> SQLCheck() {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                return connection.Query<Contact>("SELECT * FROM tblContact").ToList();
+            var newConnection = new SqlConnection(connectionString);
+            using (newConnection) {
+                return newConnection.Query<Contact>("SELECT * FROM tblContact").ToList();
             }
         }
 
@@ -294,6 +295,10 @@ namespace ContactsAttempt {
                 RestoreBtn.Visibility = Visibility.Hidden;
                 btnDelete.Visibility = Visibility.Visible;
             }
+
+            if (Contact.currentContact != null) {
+                SaveContact(Contact.currentContact);
+            }
         }
 
         private void ButtonsCheck() {
@@ -392,23 +397,23 @@ namespace ContactsAttempt {
         }
 
         private void SqlQuery(string query) {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                connection.Query<Contact>($"{query}");
+            var newConnection = new SqlConnection(connectionString);
+            using (newConnection) {
+                newConnection.Query<Contact>($"{query}");
             }
         }
 
         private List<Contact> SqlQueryList(string query) {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                return connection.Query<Contact>($"{query}").ToList();
+            var newConnection = new SqlConnection(connectionString);
+            using (newConnection) {
+                return newConnection.Query<Contact>($"{query}").ToList();
             }
         }
 
         private Contact SqlQueryContact(string query) {
-            var connection = new SqlConnection(connectionString);
-            using (connection) {
-                return connection.Query<Contact>($"{query}").First();
+            var newConnection = new SqlConnection(Contact.ConnectionString);
+            using (newConnection) {
+                return newConnection.Query<Contact>($"{query}").First();
             }
         }
 
@@ -417,7 +422,7 @@ namespace ContactsAttempt {
         #region FileIO
 
         private Contact ReadSavedContact() {
-            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\savedContact.txt";
+            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\savedContact.txt";
             string saveContactId = $"{Contact.currentContact.Id}";
 
             if (File.Exists(path)) {
@@ -443,12 +448,28 @@ namespace ContactsAttempt {
         }
 
         private void SaveContact(Contact currentContact) {
-            string path = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\savedContact.txt";
+            var workingDirectory = Environment.CurrentDirectory;
+            string path = $"{workingDirectory}\\savedContact.txt";
 
             try {
                 File.WriteAllText(path, currentContact.Id.ToString());
             } catch (Exception error) { }
         }
+
+        //private void ReadConnectionString() {
+        //
+        //    var workingDirectory = Environment.CurrentDirectory;
+        //    string path = $"{workingDirectory}\\connectionString.txt";
+        //
+        //    if (File.Exists(path)) {
+        //        Contact.ConnectionString = File.ReadAllText(path);
+        //
+        //    } else {
+        //        try {
+        //            File.WriteAllText(path, "Server=localhost;Database=Contacts;Trusted_Connection=true");
+        //        } catch (Exception error) { }
+        //    }
+        //}
 
         #endregion
     }

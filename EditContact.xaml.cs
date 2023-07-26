@@ -26,7 +26,8 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class EditContact : UserControl {
 
-        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = Contact.ConnectionString;
+
         static string ContactImagePath;
         static string firstName = Contact.currentContact.FirstName;
         static string lastName = Contact.currentContact.LastName;
@@ -176,10 +177,9 @@ namespace ContactsAttempt {
                 selectedContact.Picture = ContactImagePath;
             }
 
-            var connection = new SqlConnection(connectionString);
-
-            using (connection) {
-                 connection.Query<Contact>($"UPDATE tblContact " +
+            var newConnection = new SqlConnection(connectionString);
+            using (newConnection) {
+                 newConnection.Query<Contact>($"UPDATE tblContact " +
                     $"SET firstName = '{selectedContact.FirstName}', middleName = '{selectedContact.MiddleName}', lastName = '{selectedContact.LastName}', nickname = '{selectedContact.Nickname}', title = '{selectedContact.Title}', " +
                     $"birthDate = {birthDateString}, " +
                     $"email = '{selectedContact.Email}', phone = '{selectedContact.Phone}', street = '{selectedContact.Street}', city = '{selectedContact.City}', state = '{selectedContact.State}', zipCode = '{selectedContact.ZipCode}', country = '{selectedContact.Country}', " +

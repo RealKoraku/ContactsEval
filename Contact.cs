@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Printing;
 using System.Runtime.CompilerServices;
@@ -11,6 +12,9 @@ using System.Threading.Tasks;
 namespace ContactsAttempt {
 
     public class Contact {
+
+        public static string ConnectionString = "";
+        public static SqlConnection SqlConnection = new SqlConnection(ConnectionString);
 
         public static string DatabaseName { get; set; }
         public static string FontSize { get; set; }

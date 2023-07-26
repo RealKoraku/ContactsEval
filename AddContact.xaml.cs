@@ -23,7 +23,9 @@ namespace ContactsAttempt {
     /// </summary>
     public partial class AddContact : UserControl {
 
-        static string connectionString = $"Server=localhost;Database=Contacts;Trusted_Connection=true";
+        static string connectionString = Contact.ConnectionString;
+        static SqlConnection connection = new SqlConnection(connectionString);
+
         static string newContactImagePath = "";
 
         public AddContact() {
@@ -109,7 +111,6 @@ namespace ContactsAttempt {
         }
 
         private void AddContactToDatabase(Contact newContact) {
-            var connection = new SqlConnection(connectionString);
             string favString;
 
             if (newContact.IsFavorite) {
@@ -118,8 +119,9 @@ namespace ContactsAttempt {
                 favString = "0";
             }
 
-            using (connection) {
-                connection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, picture, isFavorite, isActive) " +
+            var newConnection = new SqlConnection(connectionString);
+            using (newConnection) {
+                newConnection.Query<Contact>("INSERT INTO tblContact (firstName, middleName, lastName, nickname, title, birthDate, email, phone, street, city, state, zipCode, country, website, notes, picture, isFavorite, isActive) " +
                     $"VALUES ('{newContact.FirstName}', '{newContact.MiddleName}', '{newContact.LastName}', '{newContact.Nickname}', '{newContact.Title}', " +
                     $"{newContact.BirthDate}, '{newContact.Email}', '{newContact.Phone}', '{newContact.Street}', '{newContact.City}', '{newContact.State}', '{newContact.ZipCode}', '{newContact.Country}', " +
                     $"'{newContact.Website}', '{newContact.Notes}', '{newContactImagePath}', '{favString}', '1')");
@@ -141,7 +143,8 @@ namespace ContactsAttempt {
             if (result == true) {
                 //STORE FILE PATH
                 string selectedFile = openFileDialog.FileName;
-                string destinationFolder = "C:\\Users\\MCA Coder\\source\\repos\\ContactsAttempt\\images\\";
+                var workingDirectory = Environment.CurrentDirectory;
+                string destinationFolder = $"{workingDirectory}\\";
                 string destinationFileName = System.IO.Path.GetFileName(selectedFile);
                 string destinationFilePath = System.IO.Path.Combine(destinationFolder, destinationFileName);
 
